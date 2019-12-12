@@ -5,10 +5,6 @@
 
 In this webinar, we will briefly review data visualization principles and practices and jump into a series of data visualization examples using Python libraries including pandas, matplotlib, bokeh, seaborn, and networkx. 
 
-This webinar will use the Zoom conferencing system. You should receive an email with connection details a few days prior to the event. Please send any questions to training-info@sdsc.edu.
-
- 
-
 About the Instructor:
 Jeff Sale, M.A., XSEDE ECSS Visualization Consultant and SDSC Learning Design Technologist
 
