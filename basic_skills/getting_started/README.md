@@ -28,6 +28,31 @@ You will be directed to the XSEDE portal, where you will create a Portal User ac
 [Back to Top](#top)
 <hr>
 
+## <a name="term-app-dn-info"></a>Getting Domain Name & Host Information
+Each machine you work with will have a `<domain_name>`,  `<hostname>` or `<ip_address>`. You can learn about IP addresses and domain names here: https://computer.howstuffworks.com/dns.htm.
+
+* NOTE: The *DN* (domain name) for Comet is    `comet.sdsc.edu`
+
+You may need to know the physical IP address of the cluster. To do this, run the `nslookup` command from the command line of your local terminal window (or on comet if are logged in)
+```
+[username@laptop:] nslookup comet.sdsc.edu
+Server:		192.168.86.1
+Address:	192.168.86.1#53
+
+Non-authoritative answer:
+Name:	comet.sdsc.edu
+Address: 198.202.113.252
+Name:	comet.sdsc.edu
+Address: 198.202.113.253
+```
+
+The public IP address appears under the line labeled "Non-authoritative answer:" and for Comet there are two. * Comet's DN is. comet.sdsc.edu
+* Comet's IP address is 198.202.113.252 and 198.202.113.253. 
+* You can log onto Comet using either the DN or the IP addresses. 
+
+[Back to Top](#top)
+<hr>
+
 ## <a name="term-app"></a>How to Use the Terminal Application:
 
 The terminal applications are used to connect clients (you and your laptop) to remote computers (such as Comet). See https://en.wikipedia.org/wiki/Secure_Shell for more information. The best known example of using a terminal is for logging in/connecting to a remote computer systems by users. This is called a client-server connection. Terminals are interactive: you type in a command to run, and the outputs are displayed on the terminal. Executing any command is done by typing it and pressing Enter.
@@ -104,29 +129,6 @@ the system until they contact user services.
 [Back to Top](#top)
 <hr>
 
-## <a name="term-app-dn-info"></a>Getting Domain Name & Host Information
-Each machine you work with will have a `<domain_name>`,  `<hostname>` or `<ip_address>`. You can learn about IP addresses and domain names here: https://computer.howstuffworks.com/dns.htm.
-
-* NOTE: The *DN* (domain name) for Comet is    `comet.sdsc.edu`
-
-You may need to know the physical IP address of the cluster. To do this, run the `nslookup` command from the command line of your terminal window
-```
-[username@comet:] nslookup comet.sdsc.edu
-Server:		192.168.86.1
-Address:	192.168.86.1#53
-
-Non-authoritative answer:
-Name:	comet.sdsc.edu
-Address: 198.202.113.253
-Name:	comet.sdsc.edu
-Address: 198.202.113.252
-```
-
-The IP address is the  line labeled "Address" and for Comet there are two. YOu can log onto Comet using either the DN or the IP addresses.
-
-[Back to Top](#top)
-
-<hr>
 
 ## <a name="comet-user-guide"></a>Comet User Guide
 
