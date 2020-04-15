@@ -126,7 +126,7 @@ the system until they contact user services.
 [username@comet-ln2 ~]$
 ```
 Now that you are logged onto Comet, you can begin working with your code. If you are new to Unix, please see the tutorials:
-* [basic linux skills](https://github.com/sdsc-hpc-training/webinars/tree/master/basic_skills/basic_linux_skills)
+* [Basic Linux Skills](https://github.com/sdsc-hpc-training/webinars/tree/master/basic_skills/basic_linux_skills)
 * [Comet 101](https://github.com/sdsc-hpc-training/webinars/tree/master/20200416_comet_101)
 
 
