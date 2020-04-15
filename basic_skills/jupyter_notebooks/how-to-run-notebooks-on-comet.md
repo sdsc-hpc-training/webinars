@@ -121,7 +121,7 @@ http://comet-14-0-4:8888/?token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 You can copy and  paste this URL into your local Web browser. You will see a running Jupyter
 notebook and a listing of the notebooks in your directory. From there everything should be working as a regular notebook.
 
-<img src="./images/jupyter-notebook-comet-http.png" alt="SSH Connection" width="300px" />
+<img src="./images/jupyter-notebook-comet-http.png" alt="SSH Connection" width="500px" />
 
 Notes: 
 * The token is part of your authentication and should not be shared so don't share it.
