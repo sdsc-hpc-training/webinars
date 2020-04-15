@@ -11,7 +11,7 @@ In this exercise, you must use your SDSC or XSEDE account to log onto the Comet 
     
 * [Obtain your Comet account](#obtain-your-comet-account)
 * [Getting Domain Name & Host Information](#term-app-dn-info)
-* [Using the Terminal Application to connect to Comet](#term-app)
+* [Using a Terminal Application to Connect to Comet](#term-app)
     - [Mac Users](#term-app-mac-users)
     - [Windows Users](#term-app-windows-users)
     - [Terminal Connection Example](#term-app-example)
@@ -53,7 +53,7 @@ The public IP address appears under the line labeled "Non-authoritative answer:"
 [Back to Top](#top)
 <hr>
 
-## <a name="term-app"></a>How to Use the Terminal Application:
+## <a name="term-app"></a>Using a Terminal Application to Connect to Comet:
 
 The terminal applications are used to connect clients (you and your laptop) to remote computers (such as Comet). See https://en.wikipedia.org/wiki/Secure_Shell for more information. The best known example of using a terminal is for logging in/connecting to a remote computer systems by users. This is called a client-server connection. Terminals are interactive: you type in a command to run, and the outputs are displayed on the terminal. Executing any command is done by typing it and pressing Enter.
 
@@ -61,7 +61,7 @@ The terminal applications are used to connect clients (you and your laptop) to r
 
 SSH provides a secure channel over any network in a client-server architecture. You will be using your laptop to access SDSC’s HPC systems using the secure shell command `ssh`. It is essential that you be able to run secure shell (or a similar connection tool) with X11 forwarding enabled, which allows you to have data encryption and to launch windows applications (e.g. plotting, or a browser).
 
-*NOTE: The `hostname` for Comet is `comet.sdsc.edu`
+*NOTE: The `hostname` or `DN` for Comet is `comet.sdsc.edu`
 
 <img src="cluster-connection-diagram.png" alt="SSH Connection" width="350px" />
 
