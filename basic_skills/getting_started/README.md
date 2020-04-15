@@ -5,7 +5,7 @@
 
 [//]: # ( Comment2 )
 
-In this exercise, you must use your SDSC or XSEDE account to log onto the Comet cluster. This exercise verifies that your account is working, that your laptop is properly configured, and that your Comet user environment is correctly setup.
+In this exercise, you must use your SDSC or XSEDE account to log onto the Comet cluster. To do this you need a comet account, and an application that can be used to connect to Comet using [SSH](https://en.wikipedia.org/wiki/Secure_Shell). This exercise verifies that your account is working, that your laptop is properly configured, and that your Comet user environment is correctly setup.
 
 <a name="top">In this document, we will show you how to:
     
