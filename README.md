@@ -8,7 +8,7 @@ https://www.sdsc.edu/education_and_training/training/index.html
 
 ### Basic Skills
 To be successful at HPC, you should be familiar with running basic Unix commands, connecting to Comet via SSH, and other basic skills. See:
-https://github.com/sdsc-hpc-training/webinars/tree/master/basic_tutorials
+https://github.com/sdsc-hpc-training/webinars/tree/master/basic_skills
 
 
 
