@@ -60,11 +60,14 @@ https://www.tecmint.com/ssh-passwordless-login-using-ssh-keygen-in-5-easy-steps/
 <hr>
 
 ## <a name="term-app-windows-users"></a>Windows users
-Windows users will need to run an X Server and an ssh-like client. [Cygwin](https://www.cygwin.com) provides a comprehensive Linux-like environment and an X server (Cygwin/X). Putty will also work for direct access to Comet, it is only used for file transfers. For download and installation instructions, see:
+* 'Windows 10'
+Windows Terminal. Windows Terminal (codenamed Cascadia) is a terminal emulator for Windows 10 written by Microsoft. It includes support for the Command Prompt, PowerShell, WSL and SSH. 
 
-* http://www.cygwin.com/
-* http://x.cygwin.com/
-* https://www.putty.org/
+* Older Windows users will need to run an X Server and an ssh-like client. [Cygwin](https://www.cygwin.com) provides a comprehensive Linux-like environment and an X server (Cygwin/X). Putty will also work for direct access to Comet, it is only used for file transfers. For download and installation instructions, see:
+
+   * http://www.cygwin.com/
+   * http://x.cygwin.com/
+   * https://www.putty.org/
 
 [Back to Top](#top)
 <hr>
