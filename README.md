@@ -1,9 +1,14 @@
 # SDSC Training
-Repository for SDSC webinars and other training materials
-<a name="top">Available Webinar Material:
 
-| Webinar|Date|
-|---|---|
-| [Introduction to Running Jobs on Comet](introduction-to-running-jobs-on-comet) | 01/09/2019 |
-| [GPU Computing and Programming](gpu_computing) | 04/09/2019 |
+Repository for SDSC webinars and other training materials
+
+## NOTES:
+### Training information for webinars, bootcamps, institutes and other events can be found here:
+https://www.sdsc.edu/education_and_training/training/index.html
+
+### Basic Skills
+To be successful at HPC, you should be familiar with running basic Unix commands, connecting to Comet via SSH, and other basic skills. See:
+https://github.com/sdsc-hpc-training/webinars/tree/master/basic_tutorials
+
+
 
