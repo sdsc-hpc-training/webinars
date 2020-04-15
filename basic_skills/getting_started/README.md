@@ -17,13 +17,13 @@ In this exercise, you must use your SDSC or XSEDE account to log onto the Comet 
     - [Getting Domain Name & Host Information](#term-app-dn-info)
 * [Expand your knowledge using Comet User guide](#comet-user-guide)
 
-Note: if you have any difficulties completing this task, please contact Institute staff at <consult@sdsc.edu>.
+Note: if you have any difficulties completing this task, please contact HPC consulting at <consult@sdsc.edu>.
 
 ## <a name="obtain-your-comet-account"></a>Obtain your comet account:
 
 To obtain a trial Comet account see the Comet user guide at  http://www.sdsc.edu/support/user_guides/comet.html#trial_accounts
 
-Note: you will be directed to the XSEDE portal, where you will create a portal user account, which will be used to set up your *trial* comet account. This account can then be used for other Comet allocations.
+You will be directed to the XSEDE portal, where you will create a Portal User account. Information from that account will be used to set up your *trial* Comet account. Note that the Portal account and the Comet account may be different, so keep track of them both. The Comet account can then be used for other Comet allocations.
 
 [Back to Top](#top)
 <hr>
