@@ -73,7 +73,7 @@ The command we need to run to fire up a notebook is the `ipython` command. You c
 
 There are pros and cons for choosing your own installation (you can customize it and maintain it), or choosing the system version -- it will always work, and will be updated as other software dependencies change. For these examples, we will use the _system supported_ version.
 
-First step is to load the singularity module that knows about system wide supported jupyter notebooks and then load a singularity image. Note that by default the version of `ipython` is a local installation in my home directory.
+The next step is to load the singularity module that knows about system wide supported jupyter notebooks and then load a singularity image. Note that by default the version of `ipython` is a local installation in my home directory.
 ```
 (base) [mthomas@comet-14-03:~/comet101] which ipython
 ~/miniconda3/bin/ipython
@@ -88,18 +88,9 @@ Singularity> which ipython
 /opt/anaconda3/bin/ipython
 ```
 
-You should see that you are in a new shell:
+You should also notice that you are in a new shell by the new prompt and that your environment is different:
 ```
 Singularity> 
-Singularity> ll   
-bash: ll: command not found
-Singularity> ls -al
-total 103
-drwxr-xr-x  3 mthomas use300   4 Apr 15 12:28 .
-drwxr-x--- 50 mthomas use300  77 Apr 15 12:28 ..
-drwxr-xr-x  3 mthomas use300  27 Apr 15 12:17 PythonSeries
--rw-r--r--  1 mthomas use300 357 Apr 15 12:28 hello_world.ipynb
-Singularity> cd PythonSeries/
 Singularity> ls -al
 total 325
 drwxr-xr-x 3 mthomas use300    27 Apr 15 12:17 .
@@ -113,22 +104,29 @@ drwxr-xr-x 8 mthomas use300    13 Apr 15 12:17 .git
 -rw-r--r-- 1 mthomas use300  3851 Apr 15 12:17 Markdown.ipynb
 [snip]
 ```
-If you have a `.bash_profile` script, you might want to run that setup your normal environment.
+If you have a `.bash_profile` script, you might want to run that in order to setup your normal environment.
 
 Check out the PythonSeries/Readme.md file, it will explaing what is in the different notebooks.
-Launch the Jupyter Notebook application. 
+Launch the Jupyter Notebook application. Be sure to navigate to a directory where there are notebooks located. 
+
 Note: this application will be running on comet, and you will be given a URL which will connect your local web browser the interactive comet session:
 ```
 ipython notebook --no-browser --ip=`/bin/hostname`
 ```
-This will give you an address which has localhost in it and a token. Something
+This will give you an address which has the comet hostname in it and a token. Something
 like:
 ```
 http://comet-14-0-4:8888/?token=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 ```
-You can then paste it into your browser. You will see a running Jupyter
+You can copy and  paste this URL into your local Web browser. You will see a running Jupyter
 notebook and a listing of the notebooks in your directory. From there everything should be working as a regular notebook.
-Note: This token is your auth so don't email/send it around. It will go away when you stop the notebook. 
+
+<img src="images/jupyter-notebook-comet-http.png" alt="SSH Connection" width="300px" /
+
+Notes: 
+* The token is part of your authentication and should not be shared so don't share it.
+* It will go away when you stop the notebook. 
+* There is a well-known security flaw in hosting Jupyter Notebooks using this method: note that the URL is only HTTP, not HTTPS. As a result, your notebook connection is hackable. There are solutions, which include hosting the notebook using SSH tunneling, and using the newly developed SDSC Reverse Proxy Server (release date will be in April 2020).
 
 To learn about Python, run the ```Python basics.ipynb```   notebook.
 To see an example of remote visualization, run the  ```Matplotlib.ipynb```  notebook!
