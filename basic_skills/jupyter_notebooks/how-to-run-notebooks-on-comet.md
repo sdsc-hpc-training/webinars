@@ -46,12 +46,13 @@ comet-ln2.sdsc.edu
 ```
 Notice the name of the login node that you are on.  Next: 
 * create a test directory for testing a notebook, or ```cd``` into one you have already created
-* Clone this repository (developed by Bob Sinkovits):   [https://github.com/sinkovit/PythonSeries](https://github.com/sinkovit/PythonSeries)
+* Clone this repository (developed by Bob Sinkovits):   
+    -- [https://github.com/sinkovit/PythonSeries](https://github.com/sinkovit/PythonSeries)
 ```
 git clone git@github.com:sinkovit/PythonSeries.git
 ```
 
-Get an interactive node using the `debug` queue for 30 minutes (you may want to increase that), with a `bash1 shell:
+Obtain an interactive node using the `debug` queue for 30 minutes (you may want to increase that), with a `bash` shell:
 ```
 (base) [mthomas@comet-ln2:~] hostname
 comet-ln2.sdsc.edu
