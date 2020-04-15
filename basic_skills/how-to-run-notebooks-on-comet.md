@@ -1,7 +1,9 @@
 # SDSC HPC User Training
  
-## 1. Running Jupyter Notebooks On Comet (by Mary Thomas): 
-Learn how to run/edit a jupyter notebook on comet using Python notebooks 
+## 1. Running Jupyter Notebooks On Comet using SSH connection
+### by Mary Thomas, mpthomas @ ucsd.edu
+
+Goal: Learn how to run/edit a jupyter notebook on comet using Python notebooks 
 
 * Log onto comet.sdsc.edu  
 ```
