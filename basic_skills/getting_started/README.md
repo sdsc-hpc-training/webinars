@@ -61,7 +61,7 @@ https://www.tecmint.com/ssh-passwordless-login-using-ssh-keygen-in-5-easy-steps/
 
 ## <a name="term-app-windows-users"></a>Windows users
 * **Windows 10** has a new terminal app called *Windows Terminal*, which is a terminal emulator for Windows 10 written by Microsoft. It includes support for the Command Prompt, PowerShell, WSL and SSH and other commands. While not a full Unix OS, it has shown to be very popular and useful within the HPC community. MSFT has created a GitHub repo with source code, installation and documentation here:
-** https://github.com/Microsoft/Terminal
+   * https://github.com/Microsoft/Terminal
 
 * **Older Windows** users will need to run an X Server and an ssh-like client. [Cygwin](https://www.cygwin.com) provides a comprehensive Linux-like environment and an X server (Cygwin/X). Putty will also work for direct access to Comet, it is only used for file transfers. For download and installation instructions, see:
 
@@ -75,39 +75,29 @@ https://www.tecmint.com/ssh-passwordless-login-using-ssh-keygen-in-5-easy-steps/
 ## <a name="term-app-example"></a>Example of a terminal connection:
 ```
 [localuser@localhost]: ssh -X username@comet.sdsc.edu
-Warning: untrusted X11 forwarding setup failed: xauth key data not generated
-Last login: Tue Jul 17 12:15:18 2018 from wireless-169-228-90-10.ucsd.edu
-Rocks 6.2 (SideWinder)
-Profile built 16:44 08-Feb-2016
+Last login: Wed Apr 15 09:58:45 2020 from 12.345.67.89
+Rocks 7.0 (Manzanita)
+Profile built 12:32 03-Dec-2019
 
-Kickstarted 17:18 08-Feb-2016
-
-                      WELCOME TO
+Kickstarted 13:47 03-Dec-2019
+                                                                       
+                      WELCOME TO 
       __________________  __  _______________
         -----/ ____/ __ \/  |/  / ____/_  __/
           --/ /   / / / / /|_/ / __/   / /
            / /___/ /_/ / /  / / /___  / /
            \____/\____/_/  /_/_____/ /_/
-
-*******************************************************************************
-
-[1] Example Scripts: /share/apps/examples
-
-[2] Filesystems:
-
-     (a) Lustre scratch filesystem : /oasis/scratch/comet/$USER/temp_project
-         (Preferred: Scalable large block I/O)
-
-     (b) Compute/GPU node local SSD storage: /scratch/$USER/$SLURM_JOBID
-         (Meta-data intensive jobs, high IOPs)
-
-     (c) Lustre projects filesystem: /oasis/projects/nsf
-
-     (d) /home/$USER : Only for source files, libraries, binaries.
-         *Do not* use for I/O intensive jobs.
-
-[3] Comet User Guide: http://www.sdsc.edu/support/user_guides/comet.html
-******************************************************************************
+###############################################################################
+NOTICE:
+The Comet login nodes are not to be used for running processing tasks.
+This includes running Jupyter notebooks and the like.  All processing
+jobs should be submitted as jobs to the batch scheduler.  If you don’t
+know how to do that see the Comet user guide
+https://www.sdsc.edu/support/user_guides/comet.html#running.
+Any tasks found running on the login nodes in violation of this policy
+ may be terminated immediately and the responsible user locked out of
+the system until they contact user services.
+###############################################################################
 [username@comet-ln2 ~]$
 ```
 
