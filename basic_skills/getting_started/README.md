@@ -21,7 +21,9 @@ Note: if you have any difficulties completing this task, please contact Institut
 
 ## <a name="obtain-your-comet-account"></a>Obtain your comet account:
 
-To obtain a trial Comet account see the Comet user guids at  http://www.sdsc.edu/support/user_guides/comet.html#trial_accounts
+To obtain a trial Comet account see the Comet user guide at  http://www.sdsc.edu/support/user_guides/comet.html#trial_accounts
+
+Note: you will be directed to the XSEDE portal, where you will create a portal user account, which will be used to set up your *trial* comet account. This account can then be used for other Comet allocations.
 
 [Back to Top](#top)
 <hr>
