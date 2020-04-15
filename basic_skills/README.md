@@ -1,5 +1,5 @@
-# SDSC Training
+# SDSC HPC Training
 
-Basic Training Materials
+Basic HPC training materials to help you develop your HPC skills
 
 
