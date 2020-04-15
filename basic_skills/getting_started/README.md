@@ -10,11 +10,11 @@ In this exercise, you must use your SDSC or XSEDE account to log onto the Comet 
 <a name="top">In this document, we will show you how to:
     
 * [Obtain your Comet account](#obtain-your-comet-account)
+* [Getting Domain Name & Host Information](#term-app-dn-info)
 * [Using the Terminal Application to connect to Comet](#term-app)
     - [Mac Users](#term-app-mac-users)
     - [Windows Users](#term-app-windows-users)
     - [Terminal Connection Example](#term-app-example)
-    - [Getting Domain Name & Host Information](#term-app-dn-info)
 * [Expand your knowledge using Comet User guide](#comet-user-guide)
 
 Note: if you have any difficulties completing this task, please contact HPC consulting at <consult@sdsc.edu>.
