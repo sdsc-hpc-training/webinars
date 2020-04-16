@@ -637,6 +637,7 @@ Currently Loaded Modulefiles:
 /usr/local/cuda-7.0/bin/nvcc
 ```
 
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
 
@@ -683,6 +684,9 @@ Check your environment and use the CUDA <b>`nvcc`</b> command:
 [comet-ln2:~/cuda/simple_hello] 
 
 ```
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
+[Back to Top](#top)
+<hr>
 
 #### <a name="hello-world-gpu-batch-submit"></a>GPU Hello World: Batch Script Submit
 
@@ -755,6 +759,8 @@ Submitted batch job 22532827
 ```
 
 
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
+[Back to Top](#top)
 <hr>
 
 #### <a name="hello-world-gpu-batch-output"></a>GPU Hello World: Batch Job Output
@@ -846,6 +852,8 @@ To compile: check your environment and use the CUDA <b>`nvcc`</b> command:
 -rwxr-xr-x 1 user use300 517632 Apr 10 18:39 gpu_enum
 [comet-ln2:~/cuda/gpu_enum] 
 ```
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
+[Back to Top](#top)
 <hr>
 
 #### <a name="enum-gpu-batch-submit"></a>GPU Enumeration: Batch Script Submission
@@ -886,6 +894,9 @@ Submitted batch job 22527745
           22527745 gpu-share gpu_enum  user PD       0:00      1 (None)
 
 ```
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
+[Back to Top](#top)
+<hr>
 
 #### <a name="enum-gpu-batch-output"></a>GPU Enumeration: Batch Job Output 
 Output from script is for one device, which is what was specified in script.
@@ -1006,6 +1017,9 @@ drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
 -rw-r--r--  1 user user300  13482 Aug  5 19:02 matrixMul.cu
 ```
 
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
+[Back to Top](#top)
+<hr>
 
 #### <a name="mat-mul-gpu-compile"></a>Compiling CUDA Example (GPU)
 
@@ -1029,6 +1043,8 @@ drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
 -rw-r--r--  1 user user300  13482 Aug  6 00:50 matrixMul.cu
  ```
 
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
+[Back to Top](#top)
 <hr>
 
 #### <a name="mat-mul-gpu-batch-submit"></a>Matrix Mult. (GPU): Batch Script Submission
@@ -1067,6 +1083,8 @@ Submitted batch job 18347288
 ```
 
 
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
+[Back to Top](#top)
 <hr>
 
 #### <a name="mat-mul-gpu-batch-output"></a>Matrix Mult. (GPU): Batch Job Output
@@ -1221,6 +1239,10 @@ drwxr-xr-x  2 username use300      3 Aug  5 19:02 IBRUN
 drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH
 ```
 
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
+[Back to Top](#top)
+<hr>
+
 #### <a name="hello-world-mpi-interactive"></a>Hello World (MPI): Interactive Jobs
 
 * To run MPI (or other executables) from the command line, you need to use the "Interactive" nodes.
@@ -1244,7 +1266,7 @@ Sun Aug  5 22:54:20 PDT 2018
 ```
 [Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
- <hr>
+<hr>
 
 #### <a name="hello-world-mpi-batch-submit"></a>Hello World (MPI): Batch Script Submission
 To submit jobs to the Slurm queuing system, you need to create a slurm batch job script.
