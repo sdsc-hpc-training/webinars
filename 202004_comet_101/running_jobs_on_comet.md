@@ -1125,6 +1125,7 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 * [CPU Hello World: Batch Script Submission](#hello-world-mpi-batch-submit)
 * [CPU Hello World: Batch Job Output](#hello-world-mpi-batch-output)
 
+
 Change to the MPI examples directory (assuming you already copied the ):
 ```
 [username@comet-ln3 PHYS244]$ cd MPI
@@ -1413,6 +1414,10 @@ IBRUN: Job ended with value 0
 <hr>
 
 ### <a name="hello-world-omp"></a>Hello World (OpenMP)
+<b>Subsections:</b>
+* [Hello World (OpenMP): Compiling](#hello-world-omp-compile)
+* [Hello World (OpenMP): Batch Script Submission](#hello-world-omp-batch-submit)
+* [Hello World (OpenMP): Batch Job Output](#hello-world-omp-batch-output)
 
 Change to the OPENMP examples directory:
 ```
