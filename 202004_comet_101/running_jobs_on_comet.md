@@ -146,7 +146,7 @@ drwxr-xr-x   2 user use300     2 Jul 17 20:20 comet-examples
 https://github.com/sdsc/sdsc-summer-institute-2018/tree/master/0_preparation
 ```
 [mthomas@comet-ln3 ~]$ ls -al /share/apps/examples/comet101/
-(base) [mthomas@comet-ln3:~/comet101] ll /share/apps/examples/hpc-training/comet101/
+[mthomas@comet-ln3:~/comet101] ll /share/apps/examples/hpc-training/comet101/
 total 20
 drwxr-sr-x 5 mthomas  use300 4096 Apr 16 03:31 .
 drwxrwsr-x 4 mahidhar use300 4096 Apr 15 23:37 ..
@@ -244,7 +244,7 @@ http://www.sdsc.edu/support/user_guides/comet.html#modules
 
 * Default environment: `list`, `li`
 ```
-(base) [mthomas@comet-ln3:~] module list
+[mthomas@comet-ln3:~] module list
 Currently Loaded Modulefiles:
   1) intel/2018.1.163    2) mvapich2_ib/2.3.2
 ```
@@ -277,11 +277,11 @@ globus/6.0                         spark/1.5.2(default)
 
 * Load modules:
 ```
-(base) [mthomas@comet-ln3:~] module list
+[mthomas@comet-ln3:~] module list
 Currently Loaded Modulefiles:
   1) intel/2018.1.163    2) mvapich2_ib/2.3.2
-(base) [mthomas@comet-ln3:~] module add spark/1.2.0
-(base) [mthomas@comet-ln3:~] module list
+[mthomas@comet-ln3:~] module add spark/1.2.0
+[mthomas@comet-ln3:~] module list
 Currently Loaded Modulefiles:
   1) intel/2018.1.163    3) hadoop/2.6.0
   2) mvapich2_ib/2.3.2   4) spark/1.2.0
@@ -291,7 +291,7 @@ Currently Loaded Modulefiles:
 Show loaded module details:
 ```
 $ module show fftw/3.3.4
-(base) [mthomas@comet-ln3:~] module show spark/1.2.0
+[mthomas@comet-ln3:~] module show spark/1.2.0
 -------------------------------------------------------------------
 /opt/modulefiles/applications/spark/1.2.0:
 
@@ -555,15 +555,15 @@ Comet GPU nodes, see the [Comet User Guide](https://www.sdsc.edu/support/user_gu
 ## In order to compile the CUDA code, you need to load the CUDA module and verify
 that you have access to the CUDA compile command, `nvcc:`
 ```
-(base) [mthomas@comet-ln3:~/comet101] module list
+[mthomas@comet-ln3:~/comet101] module list
 Currently Loaded Modulefiles:
   1) intel/2018.1.163    2) mvapich2_ib/2.3.2
-(base) [mthomas@comet-ln3:~/comet101] module purge
-(base) [mthomas@comet-ln3:~/comet101] module load cuda
-(base) [mthomas@comet-ln3:~/comet101] module list
+[mthomas@comet-ln3:~/comet101] module purge
+[mthomas@comet-ln3:~/comet101] module load cuda
+[mthomas@comet-ln3:~/comet101] module list
 Currently Loaded Modulefiles:
   1) cuda/10.1
-  (base) [mthomas@comet-ln3:~/comet101] which nvcc
+  [mthomas@comet-ln3:~/comet101] which nvcc
   /usr/local/cuda-10.1/bin/nvcc
 ```
 
@@ -581,14 +581,14 @@ Currently Loaded Modulefiles:
 Simple hello runs a cuda command to get the device count
 on the node that job is assigned to. :
 ```
-(base) [mthomas@comet-ln3:~/comet101] cd CUDA/hello_cuda
-(base) [mthomas@comet-ln3:~/comet101/CUDA/hello_cuda] ll
+[mthomas@comet-ln3:~/comet101] cd CUDA/hello_cuda
+[mthomas@comet-ln3:~/comet101/CUDA/hello_cuda] ll
 total 30
 drwxr-xr-x 2 mthomas use300   4 Apr 16 01:59 .
 drwxr-xr-x 4 mthomas use300  11 Apr 16 01:57 ..
 -rw-r--r-- 1 mthomas use300 313 Apr 16 01:59 hello_cuda.cu
 -rw-r--r-- 1 mthomas use300 269 Apr 16 01:58 hello_cuda.sb
-(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  cat hello_cuda.cu
+[mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  cat hello_cuda.cu
 /*
  * hello_cuda.cu
  * Copyright 1993-2010 NVIDIA Corporation.
@@ -606,8 +606,8 @@ drwxr-xr-x 4 mthomas use300  11 Apr 16 01:57 ..
 ```
 * Compile using the `nvcc`</b> command:
 ```
-(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  nvcc -o hello_cuda hello_cuda.cu
-(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  ll hello_cuda
+[mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  nvcc -o hello_cuda hello_cuda.cu
+[mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  ll hello_cuda
 -rwxr-xr-x 1 user use300 517437 Apr 10 19:35 hello_cuda
 -rw-r--r-- 1 user use300    304 Apr 10 19:35 hello_cuda.cu
 [comet-ln2:~/cuda/hello_cuda]
@@ -622,7 +622,7 @@ drwxr-xr-x 4 mthomas use300  11 Apr 16 01:57 ..
 * GPU jobs can be run via the slurm scheduler, or on interactive nodes.
 * The slurm scheduler batch script is shown below:
 ```
-(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  cat hello_cuda.sb
+[mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  cat hello_cuda.sb
 #!/bin/bash
 #SBATCH --job-name="hello_cuda"
 #SBATCH --output="hello_cuda.%j.%N.out"
@@ -666,18 +666,18 @@ GPUs will be allocated on a first available, first schedule basis, unless specif
 
 To run the job, type the batch script submission command:
 ```
-(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  sbatch hello_cuda.sb
+[mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  sbatch hello_cuda.sb
 Submitted batch job 32663172
-(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]
+[mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]
 
 ```
 
 <b>Monitor the job until it is finished:</b>
 ```
 [user@comet-ln2:~/cuda/hello_cuda] squeue -u mthomas
-(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello] sbatch hello_cuda.sb
+[mthomas@comet-ln3:~/comet101/CUDA/cuda_hello] sbatch hello_cuda.sb
 Submitted batch job 32663081
-(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello] squeue -u mthomas
+[mthomas@comet-ln3:~/comet101/CUDA/cuda_hello] squeue -u mthomas
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           32663081 gpu-share hello_cu  mthomas PD       0:00      1 (Resources)
 ```
@@ -688,11 +688,11 @@ Submitted batch job 32663081
 
 #### <a name="hello-world-gpu-batch-output"></a>GPU Hello World: Batch Job Output
 ```
-(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello] cat hello_cuda.32663172.comet-30-04.out
+[mthomas@comet-ln3:~/comet101/CUDA/cuda_hello] cat hello_cuda.32663172.comet-30-04.out
 
 Hello, Webinar Participants! You have 2 devices
 
-(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]
+[mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]
 ```
 
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
@@ -804,14 +804,14 @@ module load cuda
 <b>Submit the job </b>
 * To run the job, type the batch script submission command:
 ```
-(base) [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] sbatch hello_cuda.sb
+[mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] sbatch hello_cuda.sb
 Submitted batch job 32663364
 
 ```
 <b>Monitor the job </b>
 * You can monitor the job until it is finished using the `sqeue` command:
 ```
-(base) [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] squeue -u mthomas
+[mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] squeue -u mthomas
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           32663364 gpu-share gpu_enum  mthomas PD       0:00      1 (Resources)
 
@@ -872,10 +872,10 @@ The output will show information for two devices:
 ```
 base) [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] sbatch gpu_enum.sb
 !Submitted batch job 32663404
-(base) [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] squeue -u mthomas
+[mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] squeue -u mthomas
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           32663404 gpu-share gpu_enum  mthomas CG       0:02      1 comet-33-03
-          (base) [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] cat gpu_enumX.32663404.comet-33-03.out
+          [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] cat gpu_enumX.32663404.comet-33-03.out
            --- Obtaining General Information for CUDA devices  ---
            --- General Information for device 0 ---
           Name: Tesla P100-PCIE-16GB
@@ -931,7 +931,7 @@ base) [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] sbatch gpu_enum.sb
 #### <a name="mat-mul-gpu"></a>CUDA Example: Matrix-Multiplication
 <b>Change to the CUDA Matrix-Multiplication example directory:</b>
 ```
-(base) [mthomas@comet-ln3:~/comet101/CUDA/matmul] ll
+[mthomas@comet-ln3:~/comet101/CUDA/matmul] ll
 total 454
 drwxr-xr-x 2 mthomas use300     11 Apr 16 02:59 .
 drwxr-xr-x 5 mthomas use300      5 Apr 16 02:37 ..
@@ -998,15 +998,15 @@ module load cuda
 ```
 <b> Submit the job:</b>
 ```
-(base) [mthomas@comet-ln3:~/comet101/CUDA/matmul] sbatch matmul.sb
+[mthomas@comet-ln3:~/comet101/CUDA/matmul] sbatch matmul.sb
 Submitted batch job 32663647
 ```
 <b>Monitor the job:</b>
 ```
-(base) [mthomas@comet-ln3:~/comet101/CUDA/matmul] squeue -u mthomas
+[mthomas@comet-ln3:~/comet101/CUDA/matmul] squeue -u mthomas
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           32663647 gpu-share   matmul  mthomas PD       0:00      1 (Resources)
-(base) [mthomas@comet-ln3:~/comet101/CUDA/matmul]
+[mthomas@comet-ln3:~/comet101/CUDA/matmul]
 
 ```
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
@@ -1016,7 +1016,7 @@ Submitted batch job 32663647
 #### <a name="mat-mul-gpu-batch-output"></a>Matrix Mult. (GPU): Batch Job Output
 
 ```
-(base) [mthomas@comet-ln3:~/comet101/CUDA/matmul] cat matmul.32663647.comet-33-03.out
+[mthomas@comet-ln3:~/comet101/CUDA/matmul] cat matmul.32663647.comet-33-03.out
 [Matrix Multiply Using CUDA] - Starting...
 GPU Device 0: "Tesla P100-PCIE-16GB" with compute capability 6.0
 
@@ -1098,8 +1098,8 @@ Currently Loaded Modulefiles:
 ```
 * If you have trouble with your modules, you can remove the existing environment (purge) and then reload them. After purging, the PATH variable has fewer path directories available:
 ```
-(base) [mthomas@comet-ln3:~] module purge
-(base) [mthomas@comet-ln3:~] echo $PATH
+[mthomas@comet-ln3:~] module purge
+[mthomas@comet-ln3:~] echo $PATH
 /home/mthomas/miniconda3/bin:/home/mthomas/miniconda3/condabin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/mthomas/bin
 ```
 * Next, you reload the modules that you need:
@@ -1109,7 +1109,7 @@ Currently Loaded Modulefiles:
 ```
 * You will see that there are more binaries in the PATH:
 ```
-(base) [mthomas@comet-ln3:~] echo $PATH
+[mthomas@comet-ln3:~] echo $PATH
 /opt/mvapich2/intel/ib/bin:/opt/intel/2018.1.163/compilers_and_libraries_2018.1.163/linux/bin/intel64:/home/mthomas/miniconda3/bin:/home/mthomas/miniconda3/condabin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/mthomas/bin
 ```
 
@@ -1134,7 +1134,7 @@ mpif90 -o hello_mpi hello_mpi.f90
 * Verify that the executable has been created:
 
 ```
-(base) [mthomas@comet-ln3:~/comet101/MPI] ll
+[mthomas@comet-ln3:~/comet101/MPI] ll
 total 498
 drwxr-xr-x 4 mthomas use300      7 Apr 16 01:11 .
 drwxr-xr-x 6 mthomas use300      6 Apr 15 20:10 ..
@@ -1157,12 +1157,12 @@ drwxr-xr-x 2 mthomas use300      3 Apr 16 00:57 MPIRUN_RSH
 * To run MPI (or other executables) from the command line, you need to use the "Interactive" nodes.
 * To launch the nodes (to get allocated a set of nodes), use the `srun` command. This example will request one node, all 24 cores, in the debug partition for 30 minutes:
 ```
-(base) [mthomas@comet-ln3:~/comet101/MPI] date
+[mthomas@comet-ln3:~/comet101/MPI] date
 Thu Apr 16 01:21:48 PDT 2020
-(base) [mthomas@comet-ln3:~/comet101/MPI] srun --pty --nodes=1 --ntasks-per-node=24 -p debug -t 00:30:00 --wait 0 /bin/bash
-(base) [mthomas@comet-14-01:~/comet101/MPI] date
+[mthomas@comet-ln3:~/comet101/MPI] srun --pty --nodes=1 --ntasks-per-node=24 -p debug -t 00:30:00 --wait 0 /bin/bash
+[mthomas@comet-14-01:~/comet101/MPI] date
 Thu Apr 16 01:22:42 PDT 2020
-(base) [mthomas@comet-14-01:~/comet101/MPI] hostname
+[mthomas@comet-14-01:~/comet101/MPI] hostname
 comet-14-01.sdsc.edu
 ```
 * Note:
@@ -1371,7 +1371,7 @@ Note that there is already a compiled version of the `hello_openmp.f90` code. Yo
 ```
 [mthomas@comet-ln3 OPENMP]$ ifort -o hello_openmp -qopenmp hello_openmp.f90
 [mthomas@comet-ln3 OPENMP]$ ls -al
-(base) [mthomas@comet-ln3:~/comet101/OPENMP] ll
+[mthomas@comet-ln3:~/comet101/OPENMP] ll
 total 77
 drwxr-xr-x 2 mthomas use300      7 Apr 16 00:35 .
 drwxr-xr-x 6 mthomas use300      6 Apr 15 20:10 ..
