@@ -56,7 +56,7 @@ Requirements:
         * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
         * [Matrix Mult. (GPU): Batch Script Submission](#mat-mul-gpu-batch-submit)
         * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output)
-
+ 
 * [Compiling and Running CPU Jobs](#comp-and-run-cpu-jobs)
     * [Hello World (MPI)](#hello-world-mpi)
         * [Hello World (MPI): Compiling](#helloworld-mpi-compile)
