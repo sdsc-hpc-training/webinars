@@ -353,7 +353,7 @@ http://www.sdsc.edu/support/user_guides/comet.html#compiling
 
 Comet compute nodes support several parallel programming models:
 * __MPI__: Default: Intel
-   * Default Intel Compiler: intel/2018.1.163; Other versions available.
+   * Default Intel Compiler: intel/2018.1.163; Other versions available. 
    * Other options: openmpi_ib/1.8.4 (and 1.10.2), Intel MPI, mvapich2_ib/2.1
    * mvapich2_gdr: GPU direct enabled version
 * __OpenMP__: All compilers (GNU, Intel, PGI) have OpenMP flags.
