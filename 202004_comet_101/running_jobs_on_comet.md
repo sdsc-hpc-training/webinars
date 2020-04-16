@@ -1,4 +1,4 @@
-# Comet 101: Introduction to Running Jobs on Comet Supercomputer 
+# Comet 101: Introduction to Running Jobs on Comet Supercomputer
 
 Presented by Mary Thomas (SDSC,  <mpthomas@ucsd.edu> )
 <hr>
@@ -6,7 +6,7 @@ In this tutorial, you will learn how to compile and run jobs on Comet, where to 
 The commands below can be cut & pasted into the terminal window which is connected to comet.sdsc.edu. For instructions on how to do this, see the tutorial on [Connecting to SDSC HPC Systems](https://github.com/sdsc-hpc-training/basic_skills/tree/master/connecting_to_hpc_systems)
 
 Requirements:
-* You must have a comet account in order to access the system. 
+* You must have a comet account in order to access the system.
     * To obtain a trial account:  http://www.sdsc.edu/support/user_guides/comet.html#trial_accounts
 * You must be familiar with running basic Unix commands: see the following tutorials at:
     * https://github.com/marypthomas/sdsc-training/tree/master/introduction-to-running-jobs-on-comet/preparation
@@ -24,7 +24,7 @@ Requirements:
 * [Comet Overview](#overview)
     * [Comet Architecture](#network-arch)
     * [Comet File Systems](#file-systems)
-    
+
 * [Modules: Managing User Environments](#modules)
     * [Common module commands](#module-commands)
     * [Load and Check Modules and Environment](#load-and-check-module-env)
@@ -36,7 +36,7 @@ Requirements:
     * [Using the Intel Compilers](#compilers-intel)
     * [Using the PGI Compilers](#compilers-pgi)
     * [Using the GNU Compilers](#compilers-gnu)
-    
+
 * [Running Parallel Jobs on Comet](#running-jobs)
     * [Command Line Jobs](#running-jobs-cmdline)
     * [Batch Jobs using SLURM](#running-jobs-slurm)
@@ -58,15 +58,15 @@ Requirements:
         * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output)
 
 * [Compiling and Running CPU Jobs](#comp-and-run-cpu-jobs)
+    * [Hello World (MPI)](#hello-world-mpi)
+        * [Hello World (MPI): Compiling](#helloworld-mpi-compile)
+        * [Hello World (MPI): Batch Script Submission](#helloworld-mpi-batch-submit)
+        * [Hello World (MPI): Batch Script Output](#helloworld-mpi-batch-output)
     * [Hello World (OpenMP)](#helloworld-omp)
         * [Hello World (OpenMP): Compiling](#helloworld-omp-compile)
         * [Hello World (OpenMP): Interactive jobs](#helloworld-omp-interactive)
         * [Hello World (OpenMP): Batch Script Submission](#helloworld-omp-batch-submit)
         * [Hello World (OpenMP): Batch Script Output](#helloworld-omp-batch-output)
-    * [Hello World (MPI)](#hello-world-mpi)
-        * [Hello World (MPI): Compiling](#helloworld-mpi-compile)
-        * [Hello World (MPI): Batch Script Submission](#helloworld-mpi-batch-submit)
-        * [Hello World (MPI): Batch Script Output](#helloworld-mpi-batch-output)
     * [Running Hybrid (MPI + OpenMP) Jobs](#hybrid-mpi-omp)
         * [Hybrid (MPI + OpenMP): Compiling](#hybrid-mpi-omp-compile)
         * [Hybrid (MPI + OpenMP): Batch Script Submission](#hybrid-mpi-omp-batch-submit)
@@ -78,7 +78,7 @@ Requirements:
 ## <a name="sys-env"></a>Getting Started on Comet
 
 ### <a name="comet-accounts"></a>Comet Accounts
-You must have a comet account in order to access the system. 
+You must have a comet account in order to access the system.
 * Obtain a trial account here:  http://www.sdsc.edu/support/user_guides/comet.html#trial_accounts
 * You can use your XSEDE account.
 
@@ -256,19 +256,19 @@ http://www.sdsc.edu/support/user_guides/comet.html#modules
 
 ### <a name="module-commands"></a>Common module commands
 
- 
+
    Here are some common module commands and their descriptions:
 
-| Command | Description | 
+| Command | Description |
 |---|---|
-| module list | List the modules that are currently loaded| 
-| module avail | List the modules that are available| 
-| module display <module_name> | Show the environment variables used by <module name> and how they are affected| 
-| module show  <module_name>  | Same as display| 
-| module unload <module name> | Remove <module name> from the environment| 
-| module load <module name> | Load <module name> into the environment| 
-| module swap <module one> <module two> | Replace <module one> with <module two> in the environment| 
-   
+| module list | List the modules that are currently loaded|
+| module avail | List the modules that are available|
+| module display <module_name> | Show the environment variables used by <module name> and how they are affected|
+| module show  <module_name>  | Same as display|
+| module unload <module name> | Remove <module name> from the environment|
+| module load <module name> | Load <module name> into the environment|
+| module swap <module one> <module two> | Replace <module one> with <module two> in the environment|
+
 <b> A few module commands:</b>
 
 * Default environment: `list`, `li`
@@ -357,7 +357,7 @@ Use scripts to load your module environment. This will guarantee that the curren
 
 A script for loading in a GPU/CUDA evironment is shown below. The first thing it does is to purge out all modules, and then it loads in the GNU and GPU tools needed:
 ```
-comet-ln3:~] cat loadgpuenv.sh 
+comet-ln3:~] cat loadgpuenv.sh
 #!/bin/bash
 source /etc/profile.d/modules.sh
 module purge
@@ -368,7 +368,7 @@ module load cuda
 Next, we  <b>`source`</b> this script, and check out the module environment. Note that the environment no longer includes <b>`mpirun`</b>, but does include the NVIDIA compiler command <b>`nvcc`</b>.
 ```
 [comet-ln3:~] source ./loadgpuenv.sh
-[comet-ln3:~] module list 
+[comet-ln3:~] module list
 Currently Loaded Modulefiles:
   1) gnutools/2.69   2) cuda/7.0
 [comet-ln3:~] which nvcc
@@ -379,7 +379,7 @@ Currently Loaded Modulefiles:
 
 Next, we want to change the module environment so we can do MPI work. For this we need to clear out the GPU/CUDA environment and load in the INTEL compilers. The script for this is shown below:
 ```
-[comet-ln3:~] cat loadintelenv.sh 
+[comet-ln3:~] cat loadintelenv.sh
 #!/bin/bash
 source /etc/profile.d/modules.sh
 module purge
@@ -389,7 +389,7 @@ module load intel mvapich2_ib
 
 After running the script, we see that the modules no longer include and CUDA commands, but the MPI commands like <b>`mpicc`</b> exist:
 ```
-[comet-ln3:~] source loadintelenv.sh 
+[comet-ln3:~] source loadintelenv.sh
 [comet-ln3:~] module list
 Currently Loaded Modulefiles:
   1) gnutools/2.69  2) intel/2013_sp1.2.144 3) mvapich2_ib/2.1
@@ -401,7 +401,7 @@ Currently Loaded Modulefiles:
 
 [Back to Top](#top)
 <hr>
-### <a name="module-error"></a>Module Error: command not found 
+### <a name="module-error"></a>Module Error: command not found
 
 Sometimes this error is encountered when switching from one shell to another or attempting to run the module command from within a shell script or batch job. The module command may not be inherited between the shells.  To keep this from happening, execute the following command:
 ```
@@ -415,7 +415,7 @@ OR add this command to your shell script (including Slurm batch scripts)
 
 ## <a name="compilers"></a>Compiling & Linking
 
-Comet provides the Intel, Portland Group (PGI), and GNU compilers along with multiple MPI implementations (MVAPICH2, MPICH2, OpenMPI). Most applications will achieve the best performance on Comet using the Intel compilers and MVAPICH2 and the majority of libraries installed on Comet have been built using this combination. 
+Comet provides the Intel, Portland Group (PGI), and GNU compilers along with multiple MPI implementations (MVAPICH2, MPICH2, OpenMPI). Most applications will achieve the best performance on Comet using the Intel compilers and MVAPICH2 and the majority of libraries installed on Comet have been built using this combination.
 
 Other compilers and versions can be installed by Comet staff on request. For more information, see the user guide:
 http://www.sdsc.edu/support/user_guides/comet.html#compiling
@@ -438,7 +438,7 @@ In this tutorial, we include several hands-on examples that cover many of the ca
 * HYBRID
 * GPU
 * Local scratch
-    
+
 Default/Suggested Compilers to used based on programming model and languages:
 
 | |Serial | MPI | OpenMP | MPI+OpenMP|
@@ -462,7 +462,7 @@ For AVX2 support, compile with the -xHOST option. Note that -xHOST alone does no
 
 Intel MKL libraries are available as part of the "intel" modules on Comet. Once this module is loaded, the environment variable MKL_ROOT points to the location of the mkl libraries. The MKL link advisor can be used to ascertain the link line (change the MKL_ROOT aspect appropriately).
 
-In the example below, we are working with the HPC examples that can be found in 
+In the example below, we are working with the HPC examples that can be found in
 ```
 [user@comet-14-01:~/comet-examples/PHYS244/MKL] pwd
 /home/user/comet-examples/PHYS244/MKL
@@ -479,7 +479,7 @@ drwxr-xr-x 16 user use300       16 Aug  5 19:02 ..
 
 The file `compile.txt` contains the full command to compile the `pdpttr.c` program statically linking 64 bit scalapack libraries on Comet:
 ```
-[user@comet-14-01:~/comet-examples/PHYS244/MKL] cat compile.txt 
+[user@comet-14-01:~/comet-examples/PHYS244/MKL] cat compile.txt
 mpicc -o pdpttr.exe pdpttr.c  -I$MKL_ROOT/include ${MKL_ROOT}/lib/intel64/libmkl_scalapack_lp64.a -Wl,--start-group ${MKL_ROOT}/lib/intel64/libmkl_intel_lp64.a ${MKL_ROOT}/lib/intel64/libmkl_core.a ${MKL_ROOT}/lib/intel64/libmkl_sequential.a -Wl,--end-group ${MKL_ROOT}/lib/intel64/libmkl_blacs_intelmpi_lp64.a -lpthread -lm```
 ```
 
@@ -618,7 +618,7 @@ $ squeue -u $USER
 * [GPU Enumeration ](#enum-gpu)
 * [CUDA Mat-Mult](#mat-mul-gpu)
 
-Note: Comet provides both NVIDIA K80 and P100 GPU-based resources. These GPU nodes 
+Note: Comet provides both NVIDIA K80 and P100 GPU-based resources. These GPU nodes
 are allocated as separate resources. Make sure you have enough allocations and that
 you are using the right account.
 
@@ -652,10 +652,10 @@ Currently Loaded Modulefiles:
 Simple hello runs a cuda command to get the device count
 on the node that job is assigned to:
 ```
-[comet-ln2:~/cuda/simple_hello] cat simple_hello.cu 
+[comet-ln2:~/cuda/simple_hello] cat simple_hello.cu
   1 /*
   2 * simple_hello.cu
-  3 * Copyright 1993-2010 NVIDIA Corporation. 
+  3 * Copyright 1993-2010 NVIDIA Corporation.
   4 *    All right reserved
   5 */
   6 #include <stdio.h>
@@ -667,7 +667,7 @@ on the node that job is assigned to:
  12    printf("Hello, Physics 244 Class! You have %d devices\n", deviceCount );
  13    return 0;
  14 }
-[comet-ln2:~/cuda/simple_hello] 
+[comet-ln2:~/cuda/simple_hello]
 ```
 
 Check your environment and use the CUDA <b>`nvcc`</b> command:
@@ -679,10 +679,10 @@ Check your environment and use the CUDA <b>`nvcc`</b> command:
 [comet-ln2:~/cuda/gpu_enum] which nvcc
 /usr/local/cuda-7.0/bin/nvcc
 [comet-ln2:~/cuda/simple_hello] nvcc -o simple_hello simple_hello.cu
-[comet-ln2:~/cuda/simple_hello] ll simple_hello 
+[comet-ln2:~/cuda/simple_hello] ll simple_hello
 -rwxr-xr-x 1 user use300 517437 Apr 10 19:35 simple_hello
 -rw-r--r-- 1 user use300    304 Apr 10 19:35 simple_hello.cu
-[comet-ln2:~/cuda/simple_hello] 
+[comet-ln2:~/cuda/simple_hello]
 
 ```
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
@@ -697,24 +697,24 @@ GPU nodes can be accessed via either the "gpu" or the "gpu-shared" partitions:
 ```
 or
 ```
-#SBATCH -p gpu-shared 
+#SBATCH -p gpu-shared
 ```
 
 In addition to the partition namei (required), the type of gpui (optional) and the individual GPUs are scheduled as a resource.
 ```
-#SBATCH --gres=gpu[:type]:n 
+#SBATCH --gres=gpu[:type]:n
 ```
 
 GPUs will be allocated on a first available, first schedule basis, unless specified with the [type] option, where type can be <b>`k80`</b> or <b>`p100`</b> Note: type is case sensitive.
 ```
-#SBATCH --gres=gpu:4     #first available gpu node 
-#SBATCH --gres=gpu:k80:4 #only k80 nodes 
+#SBATCH --gres=gpu:4     #first available gpu node
+#SBATCH --gres=gpu:k80:4 #only k80 nodes
 #SBATCH --gres=gpu:p100:4 #only p100 nodes
 ```
 
 <b>Contents of the Slurm script</b>
 ```
-[user@comet-ln2:~/cuda/simple_hello] cat simple_hello.sb 
+[user@comet-ln2:~/cuda/simple_hello] cat simple_hello.sb
 #!/bin/bash
 #SBATCH --job-name="simple_hello"
 #SBATCH --output="simple_hello.%j.%N.out"
@@ -744,7 +744,7 @@ echo "calling simple hello"
 
 To run the job, type the batch script submission command:
 ```
-[user@comet-ln2:~/cuda/simple_hello] sbatch simple_hello.sb 
+[user@comet-ln2:~/cuda/simple_hello] sbatch simple_hello.sb
 Submitted batch job 22532827
 [user@comet-ln2:~/cuda/simple_hello]
 
@@ -755,7 +755,7 @@ Submitted batch job 22532827
 [user@comet-ln2:~/cuda/simple_hello] squeue -u user
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           22532827 gpu-share simple_h  user PD       0:00      1 (Resources)
-[user@comet-ln2:~/cuda/simple_hello] 
+[user@comet-ln2:~/cuda/simple_hello]
 
 ```
 
@@ -766,7 +766,7 @@ Submitted batch job 22532827
 
 #### <a name="hello-world-gpu-batch-output"></a>GPU Hello World: Batch Job Output
 ```
-[user@comet-ln2:~/cuda/simple_hello] cat simple_hello.22532827.comet-33-06.out 
+[user@comet-ln2:~/cuda/simple_hello] cat simple_hello.22532827.comet-33-06.out
 loading cuda module
 
 Hello, HPC Students! You have 2 devices
@@ -779,7 +779,7 @@ Hello, HPC Students! You have 2 devices
 <hr>
 
 
-### <a name="enum-gpu"></a>GPU/CUDA Example: Enumeration 
+### <a name="enum-gpu"></a>GPU/CUDA Example: Enumeration
 
 Sections:
 * [GPU Enumeration: Compiling](#enum-gpu-compile)
@@ -791,52 +791,52 @@ Sections:
 #### <a name="enum-gpu-compile"></a>GPU Enumeration: Compiling
 
 <b>GPU Enumeration Code:</b>
-This code accesses the cudaDeviceProp object and returns information about the devices on the node. The list below is only some of the information that you can look for. The property values can be used to dynamically allocate or distribute your compute threads accross the GPU hardware in response to the GPU type. 
+This code accesses the cudaDeviceProp object and returns information about the devices on the node. The list below is only some of the information that you can look for. The property values can be used to dynamically allocate or distribute your compute threads accross the GPU hardware in response to the GPU type.
 ```
-[user@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.cu 
+[user@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.cu
 #include <stdio.h>
 
 int main( void ) {
    cudaDeviceProp prop;
    int count;
-   printf( " --- Obtaining General Information for CUDA devices  ---\n" ); 
+   printf( " --- Obtaining General Information for CUDA devices  ---\n" );
    cudaGetDeviceCount( &count ) ;
    for (int i=0; i< count; i++) {
       cudaGetDeviceProperties( &prop, i ) ;
-      printf( " --- General Information for device %d ---\n", i ); 
+      printf( " --- General Information for device %d ---\n", i );
       printf( "Name: %s\n", prop.name );
-   
-      printf( "Compute capability: %d.%d\n", prop.major, prop.minor ); 
+
+      printf( "Compute capability: %d.%d\n", prop.major, prop.minor );
       printf( "Clock rate: %d\n", prop.clockRate );
       printf( "Device copy overlap: " );
-   
+
       if (prop.deviceOverlap)
-       printf( "Enabled\n" ); 
+       printf( "Enabled\n" );
       else
        printf( "Disabled\n");
-     
-      printf( "Kernel execution timeout : " ); 
+
+      printf( "Kernel execution timeout : " );
 
       if (prop.kernelExecTimeoutEnabled)
-         printf( "Enabled\n" ); 
+         printf( "Enabled\n" );
       else
          printf( "Disabled\n" );
 
-      printf( " --- Memory Information for device %d ---\n", i ); 
-      printf( "Total global mem: %ld\n", prop.totalGlobalMem ); 
-      printf( "Total constant Mem: %ld\n", prop.totalConstMem ); 
+      printf( " --- Memory Information for device %d ---\n", i );
+      printf( "Total global mem: %ld\n", prop.totalGlobalMem );
+      printf( "Total constant Mem: %ld\n", prop.totalConstMem );
       printf( "Max mem pitch: %ld\n", prop.memPitch );
-      printf( "Texture Alignment: %ld\n", prop.textureAlignment ); 
-      printf( " --- MP Information for device %d ---\n", i ); 
+      printf( "Texture Alignment: %ld\n", prop.textureAlignment );
+      printf( " --- MP Information for device %d ---\n", i );
       printf( "Multiprocessor count: %d\n", prop.multiProcessorCount );
-      printf( "Shared mem per mp: %ld\n", prop.sharedMemPerBlock ); 
-      printf( "Registers per mp: %d\n", prop.regsPerBlock ); 
+      printf( "Shared mem per mp: %ld\n", prop.sharedMemPerBlock );
+      printf( "Registers per mp: %d\n", prop.regsPerBlock );
       printf( "Threads in warp: %d\n", prop.warpSize );
       printf( "Max threads per block: %d\n", prop.maxThreadsPerBlock );
       printf( "Max thread dimensions: (%d, %d, %d)\n", prop.maxThreadsDim[0], prop.maxThreadsDim[1], prop.maxThreadsDim[2] );
-      printf( "Max grid dimensions: (%d, %d, %d)\n", prop.maxGridSize[0], prop.maxGridSize[1], prop.maxGridSize[2] ); 
+      printf( "Max grid dimensions: (%d, %d, %d)\n", prop.maxGridSize[0], prop.maxGridSize[1], prop.maxGridSize[2] );
       printf( "\n" );
-   } 
+   }
 }
 ```
 
@@ -849,9 +849,9 @@ To compile: check your environment and use the CUDA <b>`nvcc`</b> command:
 [comet-ln2:~/cuda/gpu_enum] which nvcc
 /usr/local/cuda-7.0/bin/nvcc
 [comet-ln2:~/cuda/gpu_enum] nvcc -o gpu_enum -I.  gpu_enum.cu
-[comet-ln2:~/cuda/gpu_enum] ll gpu_enum 
+[comet-ln2:~/cuda/gpu_enum] ll gpu_enum
 -rwxr-xr-x 1 user use300 517632 Apr 10 18:39 gpu_enum
-[comet-ln2:~/cuda/gpu_enum] 
+[comet-ln2:~/cuda/gpu_enum]
 ```
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
@@ -860,7 +860,7 @@ To compile: check your environment and use the CUDA <b>`nvcc`</b> command:
 #### <a name="enum-gpu-batch-submit"></a>GPU Enumeration: Batch Script Submission
 <b>Contents of the Slurm script </b>
 
-```[comet-ln2: ~/cuda/gpu_enum] cat gpu_enum.sb 
+```[comet-ln2: ~/cuda/gpu_enum] cat gpu_enum.sb
 #!/bin/bash
 #SBATCH --job-name="gpu_enum"
 #SBATCH --output="gpu_enum.%j.%N.out"
@@ -881,9 +881,9 @@ module load cuda
 <b>Submit the job </b>
 To run the job, type the batch script submission command:
 ```
-[comet-ln2:~/cuda/gpu_enum] sbatch gpu_enum.sb 
+[comet-ln2:~/cuda/gpu_enum] sbatch gpu_enum.sb
 Submitted batch job 22527745
-[comet-ln2:~/cuda/gpu_enum] 
+[comet-ln2:~/cuda/gpu_enum]
 ```
 <b>Monitor the job </b>
 Monitor the job until it is finished
@@ -899,7 +899,7 @@ Submitted batch job 22527745
 [Back to Top](#top)
 <hr>
 
-#### <a name="enum-gpu-batch-output"></a>GPU Enumeration: Batch Job Output 
+#### <a name="enum-gpu-batch-output"></a>GPU Enumeration: Batch Job Output
 Output from script is for one device, which is what was specified in script.
 
 ```
@@ -936,17 +936,17 @@ If we change the batch script to ask for 2 devices (see line 8):
   7 ####SBATCH --gres=gpu:1         # define type of GPU
   8 #SBATCH --gres=gpu:2         # first available
   9 #SBATCH -t 00:05:00
- 10 
+ 10
  11 #Load the cuda module
  12 module load cuda
- 13 
+ 13
  14 #Run the job
  15 ./gpu_enum
 ```
 
 The output looks like this:
 ```
-[user@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.22528598.comet-33-09.out 
+[user@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.22528598.comet-33-09.out
  --- Obtaining General Information for CUDA devices  ---
  --- General Information for device 0 ---
 Name: Tesla P100-PCIE-16GB
@@ -1077,7 +1077,7 @@ Submitted batch job 18347288
 ```
 <b>Monitor the job:</b>
 ```
-[user@comet-ln2 CUDA]$squeue -u user 
+[user@comet-ln2 CUDA]$squeue -u user
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           18347288 gpu-share     matmul  user PD       0:00      1 (None)
 [user@comet-ln2 CUDA]$
@@ -1114,8 +1114,8 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 
 ## <a name="comp-and-run-cpu-jobs"></a> Compiling and Running CPU Jobs
 <b>Sections:</b>
-* [Hello World (OpenMP)](#hello-world-omp)
 * [Hello World (MPI)](#hello-world-mpi)
+* [Hello World (OpenMP)](#hello-world-omp)
 * [Running Hybrid (MPI + OpenMP) Jobs](#hybrid-mpi-omp)
 
 
@@ -1125,7 +1125,7 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 * [CPU Hello World: Batch Script Submission](#hello-world-mpi-batch-submit)
 * [CPU Hello World: Batch Job Output](#hello-world-mpi-batch-output)
 
-* Change to the MPI examples directory (assuming you already copied the ):
+Change to the MPI examples directory (assuming you already copied the ):
 ```
 [username@comet-ln3 PHYS244]$ cd MPI
 [username@comet-ln3 MPI]$ ll
@@ -1742,7 +1742,3 @@ Hello from thread 3 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
 [Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
 <hr>
-
-
-
-
