@@ -1450,55 +1450,57 @@ drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
 
 Note that there is already a compiled version of the `hello_openmp.f90` code. You can save or delete this version.
 
-* To compile the source code, use the `ifort` command, and check that it was created:
+* To compile the source code, use the `ifort` command, and verify that it was created:
 ```
-[username@comet-ln3 OPENMP]$ ifort -o hello_openmp -openmp hello_openmp.f90
+[username@comet-ln3 OPENMP]$ ifort -o hello_openmp -qopenmp hello_openmp.f90
 [username@comet-ln3 OPENMP]$ ls -al
-total 479
-drwxr-xr-x  2 username use300      6 Aug  2 22:33 .
-drwxr-xr-x 16 username use300     16 Aug  2 19:02 ..
--rwxr-xr-x  1 username use300 728192 Aug  2 22:33 hello_openmp
--rw-r--r--  1 username use300    267 Aug  2 22:19 hello_openmp.f90
--rw-r--r--  1 username use300    310 Aug  2 19:02 openmp-slurm.sb
--rw-r--r--  1 username use300    347 Aug  2 19:02 openmp-slurm-shared.sb
+(base) [mthomas@comet-ln3:~/comet101/OPENMP] ll
+total 77
+drwxr-xr-x 2 mthomas use300      7 Apr 16 00:35 .
+drwxr-xr-x 6 mthomas use300      6 Apr 15 20:10 ..
+-rwxr-xr-x 1 mthomas use300 816952 Apr 16 00:35 hello_openmp
+-rw-r--r-- 1 mthomas use300    267 Apr 15 15:47 hello_openmp_2.f90
+-rw-r--r-- 1 mthomas use300    267 Apr 15 15:47 hello_openmp.f90
+-rw-r--r-- 1 mthomas use300    311 Apr 15 15:47 openmp-slurm.sb
+-rw-r--r-- 1 mthomas use300    347 Apr 15 15:47 openmp-slurm-shared.sb
 
 ```
 * Note that if you try to run OpenMP code from the command line, in the current environment, the code will run (because it is based on Pthreads, which exist on the node):
 ```
 [username@comet-ln2 OPENMP]$ ./hello_openmp
- Hello from Thread Number[          12 ] and Welcome Webinar!
- Hello from Thread Number[          14 ] and Welcome Webinar!
- Hello from Thread Number[           5 ] and Welcome Webinar!
- Hello from Thread Number[          20 ] and Welcome Webinar!
- Hello from Thread Number[           8 ] and Welcome Webinar!
- Hello from Thread Number[          15 ] and Welcome Webinar!
- Hello from Thread Number[           4 ] and Welcome Webinar!
- Hello from Thread Number[           0 ] and Welcome Webinar!
- Hello from Thread Number[          23 ] and Welcome Webinar!
- Hello from Thread Number[          11 ] and Welcome Webinar!
- Hello from Thread Number[           7 ] and Welcome Webinar!
- Hello from Thread Number[          17 ] and Welcome Webinar!
- Hello from Thread Number[           9 ] and Welcome Webinar!
- Hello from Thread Number[           2 ] and Welcome Webinar!
- Hello from Thread Number[          22 ] and Welcome Webinar!
- Hello from Thread Number[           3 ] and Welcome Webinar!
- Hello from Thread Number[          13 ] and Welcome Webinar!
- Hello from Thread Number[          18 ] and Welcome Webinar!
- Hello from Thread Number[           1 ] and Welcome Webinar!
- Hello from Thread Number[          16 ] and Welcome Webinar!
- Hello from Thread Number[          10 ] and Welcome Webinar!
- Hello from Thread Number[          19 ] and Welcome Webinar!
- Hello from Thread Number[          21 ] and Welcome Webinar!
- Hello from Thread Number[           6 ] and Welcome Webinar!
+Hello from Thread Number[           8 ] and Welcome HPC Trainees!
+Hello from Thread Number[           3 ] and Welcome HPC Trainees!
+Hello from Thread Number[          16 ] and Welcome HPC Trainees!
+Hello from Thread Number[          12 ] and Welcome HPC Trainees!
+Hello from Thread Number[           9 ] and Welcome HPC Trainees!
+Hello from Thread Number[           5 ] and Welcome HPC Trainees!
+Hello from Thread Number[           4 ] and Welcome HPC Trainees!
+Hello from Thread Number[          14 ] and Welcome HPC Trainees!
+Hello from Thread Number[           7 ] and Welcome HPC Trainees!
+Hello from Thread Number[          11 ] and Welcome HPC Trainees!
+Hello from Thread Number[          13 ] and Welcome HPC Trainees!
+Hello from Thread Number[           6 ] and Welcome HPC Trainees!
+Hello from Thread Number[          10 ] and Welcome HPC Trainees!
+Hello from Thread Number[          19 ] and Welcome HPC Trainees!
+Hello from Thread Number[          15 ] and Welcome HPC Trainees!
+Hello from Thread Number[           2 ] and Welcome HPC Trainees!
+Hello from Thread Number[          18 ] and Welcome HPC Trainees!
+Hello from Thread Number[          17 ] and Welcome HPC Trainees!
+Hello from Thread Number[          23 ] and Welcome HPC Trainees!
+Hello from Thread Number[          20 ] and Welcome HPC Trainees!
+Hello from Thread Number[          22 ] and Welcome HPC Trainees!
+Hello from Thread Number[           1 ] and Welcome HPC Trainees!
+Hello from Thread Number[           0 ] and Welcome HPC Trainees!
+Hello from Thread Number[          21 ] and Welcome HPC Trainees!
 ```
 * In the example below, we used the OpenMP feature to set the number of threads from the command line.
 
 ```
 [username@comet-ln3 OPENMP]$ export OMP_NUM_THREADS=4; ./hello_openmp
- HELLO FROM THREAD NUMBER =            3
- HELLO FROM THREAD NUMBER =            1
- HELLO FROM THREAD NUMBER =            2
- HELLO FROM THREAD NUMBER =            0
+Hello from Thread Number[           0 ] and Welcome HPC Trainees!
+Hello from Thread Number[           1 ] and Welcome HPC Trainees!
+Hello from Thread Number[           2 ] and Welcome HPC Trainees!
+Hello from Thread Number[           3 ] and Welcome HPC Trainees!
  ```
 
 [Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
@@ -1529,10 +1531,10 @@ export OMP_NUM_THREADS=24
 ```
 [username@comet-ln2 OPENMP]$ sbatch openmp-slurm.sb
 [username@comet-ln2 OPENMP]$ sbatch openmp-slurm.sb ;        
-!Submitted batch job 18346700
+!Submitted batch job 32661678
 [username@comet-ln2 OPENMP]$ squeue -u username
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-          18346700   compute hell_omp  username  R       0:00      1 comet-12-65
+             32661678   compute hello_op  mthomas PD       0:00      1 (Priority)
           ...
 ```
 
@@ -1544,31 +1546,31 @@ export OMP_NUM_THREADS=24
 
 * Once the job is finished:
 ```
-cat hello_openmp.18346700.comet-12-65.out
- Hello from Thread Number[          16 ] and Welcome Webinar!
- Hello from Thread Number[          23 ] and Welcome Webinar!
- Hello from Thread Number[          12 ] and Welcome Webinar!
- Hello from Thread Number[           0 ] and Welcome Webinar!
- Hello from Thread Number[           2 ] and Welcome Webinar!
- Hello from Thread Number[           9 ] and Welcome Webinar!
- Hello from Thread Number[           1 ] and Welcome Webinar!
- Hello from Thread Number[          18 ] and Welcome Webinar!
- Hello from Thread Number[          13 ] and Welcome Webinar!
- Hello from Thread Number[          17 ] and Welcome Webinar!
- Hello from Thread Number[           3 ] and Welcome Webinar!
- Hello from Thread Number[          22 ] and Welcome Webinar!
- Hello from Thread Number[           7 ] and Welcome Webinar!
- Hello from Thread Number[          10 ] and Welcome Webinar!
- Hello from Thread Number[           4 ] and Welcome Webinar!
- Hello from Thread Number[           8 ] and Welcome Webinar!
- Hello from Thread Number[           5 ] and Welcome Webinar!
- Hello from Thread Number[           6 ] and Welcome Webinar!
- Hello from Thread Number[          15 ] and Welcome Webinar!
- Hello from Thread Number[          20 ] and Welcome Webinar!
- Hello from Thread Number[          11 ] and Welcome Webinar!
- Hello from Thread Number[          19 ] and Welcome Webinar!
- Hello from Thread Number[          21 ] and Welcome Webinar!
- Hello from Thread Number[          14 ] and Welcome Webinar!
+[username@comet-ln2 OPENMP] cat hello_openmp.32661678.comet-07-47.out 
+ Hello from Thread Number[           5 ] and Welcome HPC Trainees!
+ Hello from Thread Number[           7 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          16 ] and Welcome HPC Trainees!
+ Hello from Thread Number[           9 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          18 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          12 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          10 ] and Welcome HPC Trainees!
+ Hello from Thread Number[           0 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          14 ] and Welcome HPC Trainees!
+ Hello from Thread Number[           4 ] and Welcome HPC Trainees!
+ Hello from Thread Number[           3 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          11 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          19 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          22 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          15 ] and Welcome HPC Trainees!
+ Hello from Thread Number[           2 ] and Welcome HPC Trainees!
+ Hello from Thread Number[           6 ] and Welcome HPC Trainees!
+ Hello from Thread Number[           1 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          21 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          20 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          17 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          23 ] and Welcome HPC Trainees!
+ Hello from Thread Number[          13 ] and Welcome HPC Trainees!
+ Hello from Thread Number[           8 ] and Welcome HPC Trainees!
  ```
 
 [Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
