@@ -124,7 +124,7 @@ Kickstarted 17:27 08-Feb-2016
 
 [3] Comet User Guide: http://www.sdsc.edu/support/user_guides/comet.html
 ******************************************************************************
-[username@comet-ln3 ~]$
+[mthomas@comet-ln3 ~]$
 ```
 
 [Back to Top](#top)
@@ -154,7 +154,7 @@ drwxr-xr-x   2 user use300     2 Jul 17 20:20 comet-examples
 * Copy the `comet101 directory` from the /examples directory to your 'comet-examples' directory, which is located in your home (`/home/username`) directory. Note: you should have completed the creation of this directory as part of the *Getting Started* and *Basic Skills* preparation work:
 https://github.com/sdsc/sdsc-summer-institute-2018/tree/master/0_preparation
 ```
-[username@comet-ln3 ~]$ ls -al /share/apps/examples/comet101/
+[mthomas@comet-ln3 ~]$ ls -al /share/apps/examples/comet101/
 total 64
 drwxr-xr-x 16 mahidhar use300 4096 Apr 24 21:57 .
 drwxrwxr-x 58 mahidhar use300 4096 Jul 29 11:36 ..
@@ -175,15 +175,15 @@ drwxr-xr-x  4 mahidhar use300 4096 Apr 19 13:14 TensorFlow
 ```
 Copy the 'comet101' directory into your `comet-examples` directory:
 ```
-[username@comet-ln3 ~]$
-[username@comet-ln3 ~]$ cp -r /share/apps/examples/comet101/ comet-examples/
-[username@comet-ln3 ~]$ ls -al comet-examples/
+[mthomas@comet-ln3 ~]$
+[mthomas@comet-ln3 ~]$ cp -r /share/apps/examples/comet101/ comet-examples/
+[mthomas@comet-ln3 ~]$ ls -al comet-examples/
 total 105
 drwxr-xr-x  5 username use300   6 Aug  5 19:02 .
 drwxr-x--- 10 username use300  27 Aug  5 17:59 ..
 drwxr-xr-x 16 username use300  16 Aug  5 19:02 comet101
-[username@comet-ln3 ~]$ cd comet-examples/comet101/
-[username@comet-ln3 comet101]$ ls -al
+[mthomas@comet-ln3 ~]$ cd comet-examples/comet101/
+[mthomas@comet-ln3 comet101]$ ls -al
 total 212
 drwxr-xr-x 16 username use300 16 Aug  5 19:02 .
 drwxr-xr-x  5 username use300  6 Aug  5 19:02 ..
@@ -335,7 +335,7 @@ setenv		 SPARK_HOME /opt/spark/1.2.0
 Once you have loaded the modules, you can check the system variables that are available for you to use.
 * To see all variable, run the <b>`env`</b> command. Typically, you will see more than 60 lines containing information such as your login name, shell, your home directory:
 ```
-[username@comet-ln3 IBRUN]$ env
+[mthomas@comet-ln3 IBRUN]$ env
 SPARK_HOME=/opt/spark/1.2.0
 HOSTNAME=comet-ln3.sdsc.edu
 INTEL_LICENSE_FILE=/opt/intel/2018.1.163/compilers_and_libraries_2018.1.163/linux/licenses:/opt/intel/licenses:/root/intel/licenses
@@ -352,7 +352,7 @@ MKL_ROOT=/opt/intel/2018.1.163/compilers_and_libraries_2018.1.163/linux/mkl
 
 To see the value for any of these variables, use the `echo` command:
 ```
-[username@comet-ln3 IBRUN]$ echo $PATH
+[mthomas@comet-ln3 IBRUN]$ echo $PATH
 PATH=/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/composer_xe_2013_sp1.2.144/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/mpirt/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/debugger/gdb/intel64_mic/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/home/username/bin
 ```
 [Back to Top](#top)
@@ -544,7 +544,7 @@ For more information on the GNU compilers: man [gfortran | gcc | g++]
 <em>Do not run on the login nodes - even for simple tests</em>.
 These nodes are meant for compilation, file editing, simple data analysis, and other tasks that use minimal compute resources. Even if you could run a simple test on the command line on the login node, full tests should not be run on the login node because the performance will be adversely impacted by all the other tasks and login activities of the other users who are logged onto the same node. For example, at the moment that this note was writeen,  a `gzip` process was consuming 98% of the CPU time:
 ```
-[username@comet-ln3 OPENMP]$ top
+[mthomas@comet-ln3 OPENMP]$ top
 ...
   PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                      
 19937 XXXXX     20   0  4304  680  300 R 98.2  0.0   0:19.45 gzip
@@ -1129,8 +1129,8 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 
 Change to the MPI examples directory (assuming you already copied the ):
 ```
-[username@comet-ln3 comet101]$ cd MPI
-[username@comet-ln3 MPI]$ ll
+[mthomas@comet-ln3 comet101]$ cd MPI
+[mthomas@comet-ln3 MPI]$ ll
 total 461
 drwxr-xr-x  4 username use300      6 Aug  5 19:02 .
 drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
@@ -1139,7 +1139,7 @@ drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
 drwxr-xr-x  2 username use300      3 Aug  5 19:02 IBRUN
 drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH
 ``
-[username@comet-ln3 OPENMP]$cat ../MPI/hello_mpi.f90
+[mthomas@comet-ln3 OPENMP]$cat ../MPI/hello_mpi.f90
 !  Fortran example  
    program hello
    include 'mpif.h'
@@ -1155,7 +1155,7 @@ drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH
 
 * Note that there is already a compiled version of the `hello_mpi.f90` code. If you try to run this from the command line, in the current environment, it will fail:
 ```
-[[username@comet-ln3 MPI]$ mpirun -np 4 ./hello_mpi
+[[mthomas@comet-ln3 MPI]$ mpirun -np 4 ./hello_mpi
 LiMIC: (limic_open) file open fail
 LiMIC: (limic_open) file open fail
 LiMIC: (limic_open) file open fail
@@ -1171,8 +1171,8 @@ MPIDI_CH3I_SMP_Init(2313): LiMIC2 device does not exist: No such file or directo
 We will use the SLURM job scheduler to run this code (see batch jobs below).
 We will make a new compiled version, so you can back this file up to use for testing/checking your work:
 ```
-[username@comet-ln3 MPI]$ mv hello_mpi hello_mpi.bak
-[username@comet-ln3 MPI]$ ls -al
+[mthomas@comet-ln3 MPI]$ mv hello_mpi hello_mpi.bak
+[mthomas@comet-ln3 MPI]$ ls -al
 total 863
 drwxr-xr-x  4 username use300      7 Aug  5 19:11 .
 drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
@@ -1185,7 +1185,7 @@ Note: there are two directories that contain code needed to run the jobs in the 
 
 * First, we should verify that the user environment is correct for running the examples we will work with in this tutorial.
 ```
-[username@comet-ln3 MPI]$ module list
+[mthomas@comet-ln3 MPI]$ module list
 Currently Loaded Modulefiles:
   1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1
 ```
@@ -1197,9 +1197,9 @@ Currently Loaded Modulefiles:
 ```
 * Next, you reload the modules that you need:
 ```
-[username@comet-ln3 ~]$ module load intel
-[username@comet-ln3 ~]$ module load mvapich2_ib
-[username@comet-ln3 ~]$
+[mthomas@comet-ln3 ~]$ module load intel
+[mthomas@comet-ln3 ~]$ module load mvapich2_ib
+[mthomas@comet-ln3 ~]$
 ```
 * You will see that there are more binaries in the PATH:
 ```
@@ -1217,7 +1217,7 @@ Currently Loaded Modulefiles:
 * For this, we use the command `mpif90`, which is loaded into your environment when you loaded the modules above.
 * To see where the command is located, use the `which` command:
 ```
-[username@comet-ln3 MPI]$ which mpif90
+[mthomas@comet-ln3 MPI]$ which mpif90
 /opt/mvapich2/intel/ib/bin/mpif90
 ```
 * Compile the code:
@@ -1228,7 +1228,7 @@ mpif90 -o hello_mpi hello_mpi.f90
 * Verify that the executable has been created:
 
 ```
-[username@comet-ln3 MPI]$ ll -al
+[mthomas@comet-ln3 MPI]$ ll -al
 total 854
 drwxr-xr-x  4 username use300      7 Aug  5 19:18 .
 drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
@@ -1248,21 +1248,21 @@ drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH
 * To run MPI (or other executables) from the command line, you need to use the "Interactive" nodes.
 * To launch the nodes (to get allocated a set of nodes), use the `srun` command. This example will request one node, all 24 cores, in the debug partition for 30 minutes:
 ```
-[username@comet-ln3 MPI]$ date
+[mthomas@comet-ln3 MPI]$ date
 Sun Aug  5 22:54:04 PDT 2018
-[username@comet-ln3 MPI]$ srun --pty --nodes=1 --ntasks-per-node=24 -p debug -t 00:30:00 --wait 0 /bin/bash
-[username@comet-14-01 MPI]$ date
+[mthomas@comet-ln3 MPI]$ srun --pty --nodes=1 --ntasks-per-node=24 -p debug -t 00:30:00 --wait 0 /bin/bash
+[mthomas@comet-14-01 MPI]$ date
 Sun Aug  5 22:54:20 PDT 2018
 ```
 * If the cluster is very busy, it may take some time to obtain the nodes. Always check that your module environment is correct.
 * Once you have the interactive session, your MPI code will be allowed to execute correctly.
 ```
-[username@comet-14-01 MPI]$ mpirun -np 4 ./hello_mpi
+[mthomas@comet-14-01 MPI]$ mpirun -np 4 ./hello_mpi
  node           0 : Hello and Welcome to Webinar Participants!
  node           1 : Hello and Welcome to Webinar Participants!
  node           2 : Hello and Welcome to Webinar Participants!
  node           3 : Hello and Welcome to Webinar Participants!
-[username@comet-14-01 MPI]$
+[mthomas@comet-14-01 MPI]$
 ```
 [Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
@@ -1273,8 +1273,8 @@ To submit jobs to the Slurm queuing system, you need to create a slurm batch job
 
 * Change directories to the IBRUN directory using the `hellompi-slurm.sb` batch script:
 ```
-[username@comet-ln3 MPI]$ cd IBRUN/
-[username@comet-ln3 IBRUN]$ cat hellompi-slurm.sb
+[mthomas@comet-ln3 MPI]$ cd IBRUN/
+[mthomas@comet-ln3 IBRUN]$ cat hellompi-slurm.sb
 #!/bin/bash
 #SBATCH --job-name="hellompi"
 #SBATCH --output="hellompi.%j.%N.out"
@@ -1292,7 +1292,7 @@ ibrun -v ../hello_mpi
 ```
 * to run the job, use the command below:
 ```
-[username@comet-ln3 IBRUN]$ sbatch hellompi.sb
+[mthomas@comet-ln3 IBRUN]$ sbatch hellompi.sb
 Submitted batch job 18343608
 ```
 * For this class, we will be submitting our jobs to a reservation queue, use the `sbatch` script below:
@@ -1308,16 +1308,16 @@ sbatch --res=SI2018DAY1 hellompi-slurm.sb
 
 * Check job status using the `squeue` command.
 ```
-[username@comet-ln3 IBRUN]$ sbatch hellompi-slurm.sb; squeue -u username
+[mthomas@comet-ln3 IBRUN]$ sbatch hellompi-slurm.sb; squeue -u username
 Submitted batch job 18345138
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           18345138   compute hellompi  username PD       0:00      2 (None)
 ....
 
-[username@comet-ln3 IBRUN]$ squeue -u username
+[mthomas@comet-ln3 IBRUN]$ squeue -u username
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           18345138   compute hellompi  username  R       0:07      2 comet-21-[47,57]
-[username@comet-ln3 IBRUN]$ squeue -u username
+[mthomas@comet-ln3 IBRUN]$ squeue -u username
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           18345138   compute hellompi  username CG       0:08      2 comet-21-[47,57]
 ```
@@ -1326,7 +1326,7 @@ Submitted batch job 18345138
 
 * Look at the directory for and output file with the job id as part of the name:
 ```
-[username@comet-ln3 IBRUN]$
+[mthomas@comet-ln3 IBRUN]$
 total 48
 drwxr-xr-x 2 username use300    5 Aug  5 19:30 .
 drwxr-xr-x 4 username use300    7 Aug  5 19:22 ..
@@ -1337,7 +1337,7 @@ drwxr-xr-x 4 username use300    7 Aug  5 19:22 ..
 
 * To see the contents of the output file, use the `cat` command:
 ```
-[username@comet-ln3 IBRUN]$ cat hellompi.18345138.comet-10-58.out
+[mthomas@comet-ln3 IBRUN]$ cat hellompi.18345138.comet-10-58.out
 IBRUN: Command is ../hello_mpi
 IBRUN: Command is /home/username/comet-examples/comet101/MPI/hello_mpi
 IBRUN: no hostfile mod needed
@@ -1403,7 +1403,7 @@ IBRUN: Command string is [mpirun_rsh -np 48 -hostfile /tmp/0p4Nbx12u1 -export-al
  node          33 : Hello and Welcome to Webinar Participants!
  node          36 : Hello and Welcome to Webinar Participants!
 IBRUN: Job ended with value 0
-[username@comet-ln3 IBRUN]$
+[mthomas@comet-ln3 IBRUN]$
 ```
 * Note the order in which the output was written into the output file. There is an entry for each of the 48 cores (2 nodes, 24 cores/node), but the output is not ordered. This is typical because the time for each core to start and finish its work is asynchronous.
 
@@ -1419,8 +1419,8 @@ IBRUN: Job ended with value 0
 
 Change to the OPENMP examples directory:
 ```
-[username@comet-ln3 comet101]$ cd OPENMP/
-[username@comet-ln3 OPENMP]$ ls -al
+[mthomas@comet-ln3 comet101]$ cd OPENMP/
+[mthomas@comet-ln3 OPENMP]$ ls -al
 total 479
 drwxr-xr-x  2 username use300      6 Aug  5 22:19 .
 drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
@@ -1429,7 +1429,7 @@ drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
 -rw-r--r--  1 username use300    310 Aug  5 19:02 openmp-slurm.sb
 -rw-r--r--  1 username use300    347 Aug  5 19:02 openmp-slurm-shared.sb
 
-[username@comet-ln3 OPENMP]$ cat hello_openmp.f90
+[mthomas@comet-ln3 OPENMP]$ cat hello_openmp.f90
       PROGRAM OMPHELLO
       INTEGER TNUMBER
       INTEGER OMP_GET_THREAD_NUM
@@ -1450,10 +1450,10 @@ drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
 
 Note that there is already a compiled version of the `hello_openmp.f90` code. You can save or delete this version.
 
-* To compile the source code, use the `ifort` command, and verify that it was created:
+* In this example, we compile the source code using the `ifort` command, and verify that it was created:
 ```
-[username@comet-ln3 OPENMP]$ ifort -o hello_openmp -qopenmp hello_openmp.f90
-[username@comet-ln3 OPENMP]$ ls -al
+[mthomas@comet-ln3 OPENMP]$ ifort -o hello_openmp -qopenmp hello_openmp.f90
+[mthomas@comet-ln3 OPENMP]$ ls -al
 (base) [mthomas@comet-ln3:~/comet101/OPENMP] ll
 total 77
 drwxr-xr-x 2 mthomas use300      7 Apr 16 00:35 .
@@ -1467,7 +1467,7 @@ drwxr-xr-x 6 mthomas use300      6 Apr 15 20:10 ..
 ```
 * Note that if you try to run OpenMP code from the command line, in the current environment, the code will run (because it is based on Pthreads, which exist on the node):
 ```
-[username@comet-ln2 OPENMP]$ ./hello_openmp
+[mthomas@comet-ln2 OPENMP]$ ./hello_openmp
 Hello from Thread Number[           8 ] and Welcome HPC Trainees!
 Hello from Thread Number[           3 ] and Welcome HPC Trainees!
 Hello from Thread Number[          16 ] and Welcome HPC Trainees!
@@ -1496,7 +1496,7 @@ Hello from Thread Number[          21 ] and Welcome HPC Trainees!
 * In the example below, we used the OpenMP feature to set the number of threads from the command line.
 
 ```
-[username@comet-ln3 OPENMP]$ export OMP_NUM_THREADS=4; ./hello_openmp
+[mthomas@comet-ln3 OPENMP]$ export OMP_NUM_THREADS=4; ./hello_openmp
 Hello from Thread Number[           0 ] and Welcome HPC Trainees!
 Hello from Thread Number[           1 ] and Welcome HPC Trainees!
 Hello from Thread Number[           2 ] and Welcome HPC Trainees!
@@ -1511,7 +1511,7 @@ Hello from Thread Number[           3 ] and Welcome HPC Trainees!
 The submit script is openmp-slurm.sb:
 
 ```
-[username@comet-ln2 OPENMP]$ cat openmp-slurm.sb
+[mthomas@comet-ln2 OPENMP]$ cat openmp-slurm.sb
 #!/bin/bash
 #SBATCH --job-name="hello_openmp"
 #SBATCH --output="hello_openmp.%j.%N.out"
@@ -1529,10 +1529,9 @@ export OMP_NUM_THREADS=24
 ```
 * to submit use the sbatch command:
 ```
-[username@comet-ln2 OPENMP]$ sbatch openmp-slurm.sb
-[username@comet-ln2 OPENMP]$ sbatch openmp-slurm.sb ;        
-!Submitted batch job 32661678
-[username@comet-ln2 OPENMP]$ squeue -u username
+[mthomas@comet-ln2 OPENMP]$ sbatch openmp-slurm.sb
+Submitted batch job 32661678
+[mthomas@comet-ln2 OPENMP]$ squeue -u username
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
              32661678   compute hello_op  mthomas PD       0:00      1 (Priority)
           ...
@@ -1546,7 +1545,7 @@ export OMP_NUM_THREADS=24
 
 * Once the job is finished:
 ```
-[username@comet-ln2 OPENMP] cat hello_openmp.32661678.comet-07-47.out 
+[mthomas@comet-ln2 OPENMP] cat hello_openmp.32661678.comet-07-47.out 
  Hello from Thread Number[           5 ] and Welcome HPC Trainees!
  Hello from Thread Number[           7 ] and Welcome HPC Trainees!
  Hello from Thread Number[          16 ] and Welcome HPC Trainees!
@@ -1585,8 +1584,8 @@ Several HPC codes use a hybrid MPI, OpenMP approach.
 * Change to the HYBRID examples directory:
 
 ```
-[username@comet-ln2 comet101]$ cd HYBRID/
-[username@comet-ln2 HYBRID]$ ll
+[mthomas@comet-ln2 comet101]$ cd HYBRID/
+[mthomas@comet-ln2 HYBRID]$ ll
 total 94
 drwxr-xr-x  2 username use300      5 Aug  5 19:02 .
 drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
@@ -1596,7 +1595,7 @@ drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
 ```
 * Look at the contents of the `hello_hybrid.c` file
 ```
-[username@comet-ln2 HYBRID]$ cat hello_hybrid.c
+[mthomas@comet-ln2 HYBRID]$ cat hello_hybrid.c
 #include <stdio.h>
 #include "mpi.h"
 #include <omp.h>
@@ -1631,8 +1630,8 @@ int main(int argc, char *argv[]) {
 * To compile the hybrid MPI + OpenMPI code, we need to refer to the table of compilers listed above (and listed in the user guide).
 * We will use the command `mpicx -openmp`
 ```
-[username@comet-ln2 HYBRID]$ mpicc -openmp -o hello_hybrid hello_hybrid.c
-[username@comet-ln2 HYBRID]$ ll
+[mthomas@comet-ln2 HYBRID]$ mpicc -openmp -o hello_hybrid hello_hybrid.c
+[mthomas@comet-ln2 HYBRID]$ ll
 total 39
 drwxr-xr-x  2 username use300      5 Aug  6 00:12 .
 drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
@@ -1651,7 +1650,7 @@ drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
 * To submit the hybrid code, we still use the `ibrun` command.
 * In this example, we set the number of threads explicitly.
 ```
-[username@comet-ln2 HYBRID]$ cat hybrid-slurm.sb
+[mthomas@comet-ln2 HYBRID]$ cat hybrid-slurm.sb
 #!/bin/bash
 #SBATCH --job-name="hellohybrid"
 #SBATCH --output="hellohybrid.%j.%N.out"
@@ -1669,12 +1668,12 @@ ibrun --npernode 4 ./hello_hybrid
 ```
 * Submit the job to the Slurm queue, and check the job status
 ```
-[username@comet-ln2 HYBRID]$ sbatch hybrid-slurm.sb
+[mthomas@comet-ln2 HYBRID]$ sbatch hybrid-slurm.sb
 Submitted batch job 18347079
-[username@comet-ln2 HYBRID]$ squeue -u username
+[mthomas@comet-ln2 HYBRID]$ squeue -u username
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
           18347079   compute hellohyb  username  R       0:04      2 comet-01-[01,04]
-[username@comet-ln2 HYBRID]$ ll
+[mthomas@comet-ln2 HYBRID]$ ll
 ```
 
 [Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
@@ -1684,7 +1683,7 @@ Submitted batch job 18347079
 
 #### <a name="hybrid-mpi-omp-output"></a>Hybrid (MPI + OpenMP): Batch Script Output
 ```
-[username@comet-ln2 HYBRID]$ ll
+[mthomas@comet-ln2 HYBRID]$ ll
 total 122
 drwxr-xr-x  2 username use300      6 Aug  6 00:12 .
 drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
@@ -1692,7 +1691,7 @@ drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
 -rw-r--r--  1 username use300   3696 Aug  6 00:12 hellohybrid.18347079.comet-01-01.out
 -rw-r--r--  1 username use300    636 Aug  5 19:02 hello_hybrid.c
 -rw-r--r--  1 username use300    390 Aug  5 19:02 hybrid-slurm.sb
-[username@comet-ln2 HYBRID]$ cat hellohybrid.18347079.comet-01-01.out
+[mthomas@comet-ln2 HYBRID]$ cat hellohybrid.18347079.comet-01-01.out
 Hello from thread 4 out of 6 from process 3 out of 8 on comet-01-01.sdsc.edu
 Hello from thread 3 out of 6 from process 2 out of 8 on comet-01-01.sdsc.edu
 Hello from thread 0 out of 6 from process 1 out of 8 on comet-01-01.sdsc.edu
@@ -1741,7 +1740,7 @@ Hello from thread 5 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
 Hello from thread 3 out of 6 from process 6 out of 8 on comet-01-04.sdsc.edu
 Hello from thread 5 out of 6 from process 7 out of 8 on comet-01-04.sdsc.edu
 Hello from thread 3 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
-[username@comet-ln2 HYBRID]$
+[mthomas@comet-ln2 HYBRID]$
 ```
 
 [Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
