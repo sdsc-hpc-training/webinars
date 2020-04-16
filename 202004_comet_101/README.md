@@ -9,5 +9,5 @@ http://www.sdsc.edu/support/user_guides/comet.html
 
 ### Basic Skills
 You must be familiar with running basic Unix commands, connecting to Comet via SSH, and other basic skills. See:
-https://github.com/sdsc-hpc-training/webinars/tree/master/basic_tutorials
+https://github.com/sdsc-hpc-training/basic_skills
 
