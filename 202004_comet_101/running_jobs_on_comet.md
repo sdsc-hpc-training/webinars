@@ -3,14 +3,17 @@
 Presented by Mary Thomas (SDSC,  <mpthomas@ucsd.edu> )
 <hr>
 In this tutorial, you will learn how to compile and run jobs on Comet, where to run them, and how to run batch jobs.
-The commands below can be cut & pasted into the terminal window, which is connected to comet.sdsc.edu. For instructions on how to do this, see the tutorial on how to use a terminal application and SSH go connect to an SDSC HPC system: https://github.com/sdsc-hpc-training/basic_skills/tree/master/connecting_to_hpc_systems)
+The commands below can be cut & pasted into the terminal window, which is connected to comet.sdsc.edu. For instructions on how to do this, see the tutorial on how to use a terminal application and SSH go connect to an SDSC HPC system: https://github.com/sdsc-hpc-training/basic_skills/tree/master/connecting_to_hpc_systems.
 
-Requirements:
+
+# Misc Notes/Updates:
 * You must have a comet account in order to access the system.
     * To obtain a trial account:  http://www.sdsc.edu/support/user_guides/comet.html#trial_accounts
 * You must be familiar with running basic Unix commands: see the following tutorials at:
     * https://github.com/sdsc-hpc-training/basic_skills
-* Note: The `hostname` for Comet is `comet.sdsc.edu`
+* The `hostname` for Comet is `comet.sdsc.edu`
+* The operating system for Comet was changed to CentOS in December, 2019. As a result, you will need to recompile all code, some modules and libraries are no longer needed, and the locations of some libraries and applications have changed. For details, see the transition guide here:
+   * https://www.sdsc.edu/services/hpc/comet_upgrade.html
 
 <em>If you have any difficulties completing these tasks, please contact SDSC Consulting group at <consult@sdsc.edu>.</em>
 <hr>
@@ -89,14 +92,12 @@ Details about how to access Comet under different circumstances are described in
  </a><img src="images/comet-logon.png" alt="Comet Logon" width="500px" />
 
 ```
-[username@gidget:~]
-[username@gidget:~] ssh -Y comet.sdsc.edu
-Warning: No xauth data; using fake authentication data for X11 forwarding.
-Last login: Tue Jul 17 12:08:53 2018 from wireless-169-228-90-10.ucsd.edu
-Rocks 6.2 (SideWinder)
-Profile built 16:45 08-Feb-2016
+[mthomas@gidget:~] ssh -Y comet.sdsc.edu
+Last login: Wed Apr 15 23:56:08 2020 from 76.176.117.51
+Rocks 7.0 (Manzanita)
+Profile built 13:03 03-Dec-2019
 
-Kickstarted 17:27 08-Feb-2016
+Kickstarted 14:18 03-Dec-2019
 
                       WELCOME TO
       __________________  __  _______________
@@ -105,26 +106,17 @@ Kickstarted 17:27 08-Feb-2016
            / /___/ /_/ / /  / / /___  / /
            \____/\____/_/  /_/_____/ /_/
 
-*******************************************************************************
-
-[1] Example Scripts: /share/apps/examples
-
-[2] Filesystems:
-
-     (a) Lustre scratch filesystem : /oasis/scratch/comet/$USER/temp_project
-         (Preferred: Scalable large block I/O)
-
-     (b) Compute/GPU node local SSD storage: /scratch/$USER/$SLURM_JOBID
-         (Meta-data intensive jobs, high IOPs)
-
-     (c) Lustre projects filesystem: /oasis/projects/nsf
-
-     (d) /home/$USER : Only for source files, libraries, binaries.
-         *Do not* use for I/O intensive jobs.
-
-[3] Comet User Guide: http://www.sdsc.edu/support/user_guides/comet.html
-******************************************************************************
-[mthomas@comet-ln3 ~]$
+###############################################################################
+NOTICE:
+The Comet login nodes are not to be used for running processing tasks.
+This includes running Jupyter notebooks and the like.  All processing
+jobs should be submitted as jobs to the batch scheduler.  If you don’t
+know how to do that see the Comet user guide
+https://www.sdsc.edu/support/user_guides/comet.html#running.
+Any tasks found running on the login nodes in violation of this policy
+ may be terminated immediately and the responsible user locked out of
+the system until they contact user services.
+###############################################################################
 ```
 
 [Back to Top](#top)
@@ -150,28 +142,17 @@ drwxr-xr-x   2 user use300     2 Jul 17 20:20 comet-examples
 /home/user/comet-examples
 [comet-ln2 comet-examples]$
 ```
-
 * Copy the `comet101 directory` from the /examples directory to your 'comet-examples' directory, which is located in your home (`/home/username`) directory. Note: you should have completed the creation of this directory as part of the *Getting Started* and *Basic Skills* preparation work:
 https://github.com/sdsc/sdsc-summer-institute-2018/tree/master/0_preparation
 ```
 [mthomas@comet-ln3 ~]$ ls -al /share/apps/examples/comet101/
-total 64
-drwxr-xr-x 16 mahidhar use300 4096 Apr 24 21:57 .
-drwxrwxr-x 58 mahidhar use300 4096 Jul 29 11:36 ..
-drwxr-xr-x  2 mahidhar use300 4096 Apr 16 22:46 COMPILER_EXAMPLES
-drwxr-xr-x  2 mahidhar use300 4096 Apr 16 21:52 CUDA
-drwxr-xr-x  2 mahidhar use300 4096 May 31 13:24 debug
-drwxr-xr-x  3 mahidhar use300 4096 Apr 19 13:15 HADOOP
-drwxr-xr-x  2 mahidhar use300 4096 Apr 16 21:52 HYBRID
-drwxr-xr-x  2 mahidhar use300 4096 Apr 16 21:52 LOCALSCRATCH
-drwxr-xr-x  2 mahidhar use300 4096 Apr 24 21:57 LOCALSCRATCH2
-drwxr-xr-x  2 mahidhar use300 4096 Apr 16 23:30 MKL
-drwxr-xr-x  4 mahidhar use300 4096 Apr 16 21:52 MPI
-drwxr-xr-x  2 mahidhar use300 4096 Apr 16 21:52 OpenACC
-drwxr-xr-x  2 mahidhar use300 4096 Apr 16 21:52 OPENMP
-drwxr-xr-x  3 mahidhar use300 4096 Apr 19 13:11 pytorch
-drwxr-xr-x  4 mahidhar use300 4096 Apr 19 13:11 SPARK
-drwxr-xr-x  4 mahidhar use300 4096 Apr 19 13:14 TensorFlow
+(base) [mthomas@comet-ln3:~/comet101] ll /share/apps/examples/hpc-training/comet101/
+total 20
+drwxr-sr-x 5 mthomas  use300 4096 Apr 16 03:31 .
+drwxrwsr-x 4 mahidhar use300 4096 Apr 15 23:37 ..
+drwxr-sr-x 5 mthomas  use300 4096 Apr 16 03:30 CUDA
+drwxr-sr-x 4 mthomas  use300 4096 Apr 16 03:30 MPI
+drwxr-sr-x 2 mthomas  use300 4096 Apr 16 03:31 OPENMP
 ```
 Copy the 'comet101' directory into your `comet-examples` directory:
 ```
@@ -184,23 +165,13 @@ drwxr-x--- 10 username use300  27 Aug  5 17:59 ..
 drwxr-xr-x 16 username use300  16 Aug  5 19:02 comet101
 [mthomas@comet-ln3 ~]$ cd comet-examples/comet101/
 [mthomas@comet-ln3 comet101]$ ls -al
-total 212
-drwxr-xr-x 16 username use300 16 Aug  5 19:02 .
-drwxr-xr-x  5 username use300  6 Aug  5 19:02 ..
-drwxr-xr-x  2 username use300  5 Aug  5 19:02 COMPILER_EXAMPLES
-drwxr-xr-x  2 username use300 11 Aug  5 19:02 CUDA
-drwxr-xr-x  2 username use300 11 Aug  5 19:02 debug
-drwxr-xr-x  3 username use300  3 Aug  5 19:02 HADOOP
-drwxr-xr-x  2 username use300  5 Aug  5 19:02 HYBRID
-drwxr-xr-x  2 username use300  6 Aug  5 19:02 LOCALSCRATCH
-drwxr-xr-x  2 username use300  5 Aug  5 19:02 LOCALSCRATCH2
-drwxr-xr-x  2 username use300  8 Aug  5 19:02 MKL
-drwxr-xr-x  4 username use300  6 Aug  5 19:02 MPI
-drwxr-xr-x  2 username use300  8 Aug  5 19:02 OpenACC
-drwxr-xr-x  2 username use300  6 Aug  5 19:02 OPENMP
-drwxr-xr-x  3 username use300  5 Aug  5 19:02 pytorch
-drwxr-xr-x  4 username use300  4 Aug  5 19:02 SPARK
-drwxr-xr-x  4 username use300  5 Aug  5 19:02 TensorFlow
+total 132
+drwxr-xr-x  6 mthomas use300  6 Apr 16 01:47 .
+drwxr-x--- 52 mthomas use300 79 Apr 16 02:27 ..
+drwxr-xr-x  5 mthomas use300  5 Apr 16 02:37 CUDA
+drwxr-xr-x  2 mthomas use300  3 Apr 15 20:16 jupyter_notebooks
+drwxr-xr-x  4 mthomas use300  7 Apr 16 01:11 MPI
+drwxr-xr-x  2 mthomas use300  9 Apr 16 00:49 OPENMP
 ```
 Most examples will contain source code, along with a batch script example so you can run the example, and compilation examples (e.g. see the MKL example).
 
