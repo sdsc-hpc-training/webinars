@@ -622,12 +622,14 @@ $ squeue -u $USER
 
 Note: Comet provides both NVIDIA K80 and P100 GPU-based resources. These GPU nodes
 are allocated as separate resources. Make sure you have enough allocations and that
-you are using the right account.
+you are using the right account. For more details and current inforation about the
+Comet GPU nodes, see the [Comet User Guide](https://www.sdsc.edu/support/user_guides/comet.html#gpu).
 
 <b> Comet GPU Hardware: </b> <br>
 <a name="gpu-hardware"></a><img src="images/comet-gpu-hardware.png" alt="Comet GPU Hardware" width="500px" />
- <p>
-<b>Load the CUDA module:</b>
+
+## Load the CUDA module:
+
 ```
 [user@comet-ln2 CUDA]$ module list
 [user@comet-ln2 CUDA]$ module purge
@@ -994,7 +996,7 @@ Max grid dimensions: (2147483647, 65535, 65535)
 [Back to Top](#top)
 <hr>
 
-### <a name="mat-mul-gpu"></a>GPU/CUDA Example: Mattrix-Multiplication
+### <a name="mat-mul-gpu"></a>GPU/CUDA Example: Matrix-Multiplication
 <b>Subsections:</b>
 * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
 * [Matrix Mult. (GPU): Batch Script Submission](#mat-mul-gpu-batch-submit)
