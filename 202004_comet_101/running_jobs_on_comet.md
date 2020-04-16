@@ -59,14 +59,14 @@ Requirements:
 
 * [Compiling and Running CPU Jobs](#comp-and-run-cpu-jobs)
     * [Hello World (MPI)](#hello-world-mpi)
-        * [Hello World (MPI): Compiling](#helloworld-mpi-compile)
-        * [Hello World (MPI): Batch Script Submission](#helloworld-mpi-batch-submit)
-        * [Hello World (MPI): Batch Script Output](#helloworld-mpi-batch-output)
-    * [Hello World (OpenMP)](#helloworld-omp)
-        * [Hello World (OpenMP): Compiling](#helloworld-omp-compile)
-        * [Hello World (OpenMP): Interactive jobs](#helloworld-omp-interactive)
-        * [Hello World (OpenMP): Batch Script Submission](#helloworld-omp-batch-submit)
-        * [Hello World (OpenMP): Batch Script Output](#helloworld-omp-batch-output)
+        * [Hello World (MPI): Compiling](#hello-world-mpi-compile)
+        * [Hello World (MPI): Batch Script Submission](#hello-world-mpi-batch-submit)
+        * [Hello World (MPI): Batch Script Output](#hello-world-mpi-batch-output)
+    * [Hello World (OpenMP)](#hello-world-omp)
+        * [Hello World (OpenMP): Compiling](#hello-world-omp-compile)
+        * [Hello World (OpenMP): Interactive jobs](#hello-world-omp-interactive)
+        * [Hello World (OpenMP): Batch Script Submission](#hello-world-omp-batch-submit)
+        * [Hello World (OpenMP): Batch Script Output](#hello-world-omp-batch-output)
     * [Running Hybrid (MPI + OpenMP) Jobs](#hybrid-mpi-omp)
         * [Hybrid (MPI + OpenMP): Compiling](#hybrid-mpi-omp-compile)
         * [Hybrid (MPI + OpenMP): Batch Script Submission](#hybrid-mpi-omp-batch-submit)
@@ -1542,7 +1542,7 @@ export OMP_NUM_THREADS=24
 [Back to Top](#top)
 <hr>
 
-#### <a name="helloworld-omp-batch-output"></a>Hello World (OpenMP): Batch Script Output
+#### <a name="hello-world-omp-batch-output"></a>Hello World (OpenMP): Batch Script Output
 
 * Once the job is finished:
 ```
