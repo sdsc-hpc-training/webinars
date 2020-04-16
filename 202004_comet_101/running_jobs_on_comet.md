@@ -612,6 +612,10 @@ $ squeue -u $USER
 
 
 ## <a name="comp-and-run-cuda-jobs"></a>Compiling and Running GPU/CUDA Jobs
+<b>Sections:</b>
+* [GPU Hello World (GPU) ](#hello-world-gpu)
+* [GPU Enumeration ](#enum-gpu)
+* [CUDA Mat-Mult](#mat-mul-gpu)
 
 Note: Comet provides both NVIDIA K80 and P100 GPU-based resources. These GPU nodes 
 are allocated as separate resources. Make sure you have enough allocations and that
@@ -633,12 +637,11 @@ Currently Loaded Modulefiles:
 /usr/local/cuda-7.0/bin/nvcc
 ```
 
-[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
 
 ### <a name="hello-world-gpu"></a>GPU/CUDA Example: Hello World
-<b>Sections:</b>
+<b>Subsections:</b>
 * [GPU Hello World: Compiling](#hello-world-gpu-compile)
 * [GPU Hello World: Batch Script Submission](#hello-world-gpu-batch-submit)
 * [GPU Hello World: Batch Job Output](#hello-world-gpu-batch-output)
@@ -759,12 +762,15 @@ Submitted batch job 22532827
 [user@comet-ln2:~/cuda/simple_hello] cat simple_hello.22532827.comet-33-06.out 
 loading cuda module
 
-Hello, Physics 244 Class! You have 2 devices
+Hello, HPC Students! You have 2 devices
 
 [user@comet-ln2:~/cuda/simple_hello]
 
 ```
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
+[Back to Top](#top)
 <hr>
+
 
 ### <a name="enum-gpu"></a>GPU/CUDA Example: Enumeration 
 
@@ -976,7 +982,7 @@ Max grid dimensions: (2147483647, 65535, 65535)
 <hr>
 
 ### <a name="mat-mul-gpu"></a>GPU/CUDA Example: Mattrix-Multiplication
-Sections:
+<b>Subsections:</b>
 * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
 * [Matrix Mult. (GPU): Batch Script Submission](#mat-mul-gpu-batch-submit)
 * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
@@ -1082,14 +1088,23 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 
 ```
 
-
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
 
-## [Compiling and Running CPU Jobs](#comp-and-run-cpu-jobs)
 
-### <a name="helloworld-mpi"></a>Hello World (MPI)
+## [Compiling and Running CPU Jobs](#comp-and-run-cpu-jobs)
+<b>Sections:</b>
+* [Hello World (OpenMP)](#hello-world-omp)
+* [Hello World (MPI)](#hello-world-mpi)
+* [Running Hybrid (MPI + OpenMP) Jobs](#hybrid-mpi-omp)
+
+
+### <a name="hello-world-mpi"></a>Hello World (MPI)
+<b>Subsections:</b>
+* [CPU Hello World: Compiling](#hello-world-mpi-compile)
+* [CPU Hello World: Batch Script Submission](#hello-world-mpi-batch-submit)
+* [CPU Hello World: Batch Job Output](#hello-world-mpi-batch-output)
 
 * Change to the MPI examples directory (assuming you already copied the ):
 ```
@@ -1147,7 +1162,7 @@ drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH
 ```
 Note: there are two directories that contain code needed to run the jobs in the parallel/slurm environment. Please don't change or edit them at this time.
 
-* Frist, we should verify that the user environment is correct for running the examples we will work with in this tutorial.
+* First, we should verify that the user environment is correct for running the examples we will work with in this tutorial.
 ```
 [username@comet-ln3 MPI]$ module list
 Currently Loaded Modulefiles:
@@ -1173,10 +1188,12 @@ Currently Loaded Modulefiles:
 [username@comet-ln3 ~]$ echo $PATH
 /opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/composer_xe_2013_sp1.2.144/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/mpirt/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/debugger/gdb/intel64_mic/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/home/username/bin
 ```
-c[Back to Top](#top)
+
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
+[Back to Top](#top)
 <hr>
 
-#### <a name="helloworld-mpi-compile"></a>Hello World (MPI): Compiling
+#### <a name="hello-world-mpi-compile"></a>Hello World (MPI): Compiling
 
 * Compile the MPI hello world code.
 * For this, we use the command `mpif90`, which is loaded into your environment when you loaded the modules above.
@@ -1204,7 +1221,7 @@ drwxr-xr-x  2 username use300      3 Aug  5 19:02 IBRUN
 drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH
 ```
 
-#### <a name="helloworld-mpi-interactive"></a>Hello World (MPI): Interactive Jobs
+#### <a name="hello-world-mpi-interactive"></a>Hello World (MPI): Interactive Jobs
 
 * To run MPI (or other executables) from the command line, you need to use the "Interactive" nodes.
 * To launch the nodes (to get allocated a set of nodes), use the `srun` command. This example will request one node, all 24 cores, in the debug partition for 30 minutes:
@@ -1225,10 +1242,11 @@ Sun Aug  5 22:54:20 PDT 2018
  node           3 : Hello and Welcome to Webinar Participants!
 [username@comet-14-01 MPI]$
 ```
- [Back to Top](#top)
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
+[Back to Top](#top)
  <hr>
 
-#### <a name="helloworld-mpi-batch-submit"></a>Hello World (MPI): Batch Script Submission
+#### <a name="hello-world-mpi-batch-submit"></a>Hello World (MPI): Batch Script Submission
 To submit jobs to the Slurm queuing system, you need to create a slurm batch job script.
 
 * Change directories to the IBRUN directory using the `hellompi-slurm.sb` batch script:
@@ -1260,10 +1278,11 @@ Submitted batch job 18343608
 sbatch --res=SI2018DAY1 hellompi-slurm.sb
 ```
 
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
 <hr>
 
-#### <a name="helloworld-mpi-batch-output"></a>Hello World (MPI): Batch Script Output
+#### <a name="hello-world-mpi-batch-output"></a>Hello World (MPI): Batch Script Output
 
 * Check job status using the `squeue` command.
 ```
@@ -1366,10 +1385,11 @@ IBRUN: Job ended with value 0
 ```
 * Note the order in which the output was written into the output file. There is an entry for each of the 48 cores (2 nodes, 24 cores/node), but the output is not ordered. This is typical because the time for each core to start and finish its work is asynchronous.
 
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
 <hr>
 
-### <a name="helloworld-omp"></a>Hello World (OpenMP)
+### <a name="hello-world-omp"></a>Hello World (OpenMP)
 
 Change to the OPENMP examples directory:
 ```
@@ -1396,10 +1416,11 @@ drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
       STOP
       END
 ```
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
 <hr>
 
-#### <a name="helloworld-omp-compile"></a>Hello World (OpenMP): Compiling
+#### <a name="hello-world-omp-compile"></a>Hello World (OpenMP): Compiling
 
 Note that there is already a compiled version of the `hello_openmp.f90` code. You can save or delete this version.
 
@@ -1454,10 +1475,11 @@ drwxr-xr-x 16 username use300     16 Aug  2 19:02 ..
  HELLO FROM THREAD NUMBER =            0
  ```
 
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
 <hr>
 
-#### <a name="helloworld-omp-batch-submit"></a>Hello World (OpenMP): Batch Script Submission
+#### <a name="hello-world-omp-batch-submit"></a>Hello World (OpenMP): Batch Script Submission
 The submit script is openmp-slurm.sb:
 
 ```
@@ -1488,6 +1510,7 @@ export OMP_NUM_THREADS=24
           ...
 ```
 
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
 <hr>
 
@@ -1522,6 +1545,7 @@ cat hello_openmp.18346700.comet-12-65.out
  Hello from Thread Number[          14 ] and Welcome Webinar!
  ```
 
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
 <hr>
 
@@ -1571,6 +1595,7 @@ int main(int argc, char *argv[]) {
 }
 ```
 
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
 <hr>
 
@@ -1589,6 +1614,7 @@ drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
 
 ```
 
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
 <hr>
 
@@ -1623,6 +1649,7 @@ Submitted batch job 18347079
 [username@comet-ln2 HYBRID]$ ll
 ```
 
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
 <hr>
 
@@ -1689,6 +1716,7 @@ Hello from thread 3 out of 6 from process 5 out of 8 on comet-01-04.sdsc.edu
 [username@comet-ln2 HYBRID]$
 ```
 
+[Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
 <hr>
 
