@@ -56,7 +56,8 @@ Requirements:
         * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
         * [Matrix Mult. (GPU): Batch Script Submission](#mat-mul-gpu-batch-submit)
         * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output)
-* [Compiling and Running CPU Jobs](#comp-and-run-cpu-jobs)      
+
+* [Compiling and Running CPU Jobs](#comp-and-run-cpu-jobs)
     * [Hello World (OpenMP)](#helloworld-omp)
         * [Hello World (OpenMP): Compiling](#helloworld-omp-compile)
         * [Hello World (OpenMP): Interactive jobs](#helloworld-omp-interactive)
@@ -1111,7 +1112,7 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 <hr>
 
 
-## [Compiling and Running CPU Jobs](#comp-and-run-cpu-jobs)
+## <a name="comp-and-run-cpu-jobs"></a> Compiling and Running CPU Jobs
 <b>Sections:</b>
 * [Hello World (OpenMP)](#hello-world-omp)
 * [Hello World (MPI)](#hello-world-mpi)
