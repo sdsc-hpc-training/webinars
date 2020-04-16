@@ -273,21 +273,29 @@ http://www.sdsc.edu/support/user_guides/comet.html#modules
 
 * Default environment: `list`, `li`
 ```
-$ module li
-Currently Loaded Module files:
-  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69
+(base) [mthomas@comet-ln3:~] module list
+Currently Loaded Modulefiles:
+  1) intel/2018.1.163    2) mvapich2_ib/2.3.2
 ```
 * List available modules:  `available`, `avail`, `av`
 
 ```
 $ module av
+base) [mthomas@comet-ln3:~] module av
+
 ------------------------- /opt/modulefiles/mpi/.intel --------------------------
-intelmpi/2016.3.210(default) mvapich2_ib/2.1(default)
-mvapich2_gdr/2.1(default)    openmpi_ib/1.8.4(default)
-mvapich2_gdr/2.2
---------------------- /opt/modulefiles/applications/.intel ---------------------
-atlas/3.10.2(default)     lapack/3.6.0(default)     scalapack/2.0.2(default)
-boost/1.55.0(default)     mxml/2.9(default)         slepc/3.6.2(default)
+mvapich2_gdr/2.3.2(default)
+[snip]
+
+------------------------ /opt/modulefiles/applications -------------------------
+abaqus/6.11.2                      lapack/3.8.0(default)
+abaqus/6.14.1(default)             mafft/7.427(default)
+abinit/8.10.2(default)             matlab/2019b(default)
+abyss/2.2.3(default)               matt/1.00(default)
+amber/18(default)                  migrate/3.6.11(default)
+. . .
+eos/3.7.1(default)                spark/1.2.0
+globus/6.0                         spark/1.5.2(default)
 . . .
 ```
 
@@ -298,27 +306,29 @@ boost/1.55.0(default)     mxml/2.9(default)         slepc/3.6.2(default)
 
 * Load modules:
 ```
-$ module load fftw/3.3.4 
-$ module li
+(base) [mthomas@comet-ln3:~] module list
 Currently Loaded Modulefiles:
-  1) intel/2013_sp1.2.144   3) gnutools/2.69
-  2) mvapich2_ib/2.1        4) fftw/3.3.4
+  1) intel/2018.1.163    2) mvapich2_ib/2.3.2
+(base) [mthomas@comet-ln3:~] module add spark/1.2.0
+(base) [mthomas@comet-ln3:~] module list
+Currently Loaded Modulefiles:
+  1) intel/2018.1.163    3) hadoop/2.6.0
+  2) mvapich2_ib/2.3.2   4) spark/1.2.0
+
 ```
 
 Show loaded module details:
 ```
 $ module show fftw/3.3.4
+(base) [mthomas@comet-ln3:~] module show spark/1.2.0
 -------------------------------------------------------------------
-/opt/modulefiles/applications/.intel/fftw/3.3.4:
-module-whatis fftw 
-module-whatis Version: 3.3.4 
-module-whatis Description: fftw 
-module-whatis Compiler: intel 
-module-whatis MPI Flavors: mvapich2_ib openmpi_ib 
-setenv FFTWHOME /opt/fftw/3.3.4/intel/mvapich2_ib 
-prepend-path PATH /opt/fftw/3.3.4/intel/mvapich2_ib/bin 
-prepend-path LD_LIBRARY_PATH /opt/fftw/3.3.4/intel/mvapich2_ib/lib 
-prepend-path LIBPATH /opt/fftw/3.3.4/intel/mvapich2_ib/lib 
+/opt/modulefiles/applications/spark/1.2.0:
+
+module-whatis	 Spark
+module-whatis	 Version: 1.2.0
+module		 load hadoop/2.6.0
+prepend-path	 PATH /opt/spark/1.2.0/bin
+setenv		 SPARK_HOME /opt/spark/1.2.0
 -------------------------------------------------------------------
 ```
 
@@ -326,21 +336,18 @@ Once you have loaded the modules, you can check the system variables that are av
 * To see all variable, run the <b>`env`</b> command. Typically, you will see more than 60 lines containing information such as your login name, shell, your home directory:
 ```
 [username@comet-ln3 IBRUN]$ env
+SPARK_HOME=/opt/spark/1.2.0
 HOSTNAME=comet-ln3.sdsc.edu
-INTEL_LICENSE_FILE=/opt/intel/composer_xe_2013_sp1.2.144/licenses:/opt/intel/licenses:/root/intel/licenses
-TERM=xterm-256color
+INTEL_LICENSE_FILE=/opt/intel/2018.1.163/compilers_and_libraries_2018.1.163/linux/licenses:/opt/intel/licenses:/root/intel/licenses
 SHELL=/bin/bash
-GDBSERVER_MIC=/opt/intel/composer_xe_2013_sp1.2.144/debugger/gdb/target/mic/bin/gdbserver
-LOADEDMODULES=intel/2013_sp1.2.144:mvapich2_ib/2.1:gnutools/2.69
-HOME=/home/username
+USER=mthomas
+PATH=/opt/spark/1.2.0/bin:/opt/hadoop/2.6.0/sbin:/opt/hadoop/contrib/myHadoop/bin:/opt/hadoop/2.6.0/bin:/home/mthomas/miniconda3/bin:/home/mthomas/miniconda3/condabin:/opt/mvapich2/intel/ib/bin:/opt/intel/2018.1.163/compilers_and_libraries_2018.1.163/linux/bin/intel64:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/mthomas/bin
+PWD=/home/mthomas
+LOADEDMODULES=intel/2018.1.163:mvapich2_ib/2.3.2:hadoop/2.6.0:spark/1.2.0
+JUPYTER_CONFIG_DIR=/home/mthomas/.jupyter
 MPIHOME=/opt/mvapich2/intel/ib
-SDSCHOME=/opt/sdsc
-PYTHONPATH=/opt/sdsc/lib:/opt/sdsc/lib/python2.6/site-packages
-LOGNAME=username
-SSH_CONNECTION=76.176.117.51 58589 198.202.113.252 22
 MODULESHOME=/usr/share/Modules
-INCLUDE=/opt/intel/composer_xe_2013_sp1.2.144/mkl/include
-INTELHOME=/opt/intel/composer_xe_2013_sp1.2.144
+MKL_ROOT=/opt/intel/2018.1.163/compilers_and_libraries_2018.1.163/linux/mkl
 ```
 
 To see the value for any of these variables, use the `echo` command:
@@ -355,13 +362,12 @@ PATH=/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/compose
 
 Use scripts to load your module environment. This will guarantee that the current working environment is what you want, and that you are not inheriting unwanted modules/applications. In order for the commands run inside a script (child shell) to change the parent shell, you must use the <b>`source`</b> command:
 
-A script for loading in a GPU/CUDA evironment is shown below. The first thing it does is to purge out all modules, and then it loads in the GNU and GPU tools needed:
+A script for loading in a GPU/CUDA environment is shown below. The first thing it does is to purge out all modules, and then it loads in the GNU and GPU tools needed:
 ```
 comet-ln3:~] cat loadgpuenv.sh
 #!/bin/bash
 source /etc/profile.d/modules.sh
 module purge
-module load gnutools
 module load cuda
 ```
 
@@ -370,7 +376,7 @@ Next, we  <b>`source`</b> this script, and check out the module environment. Not
 [comet-ln3:~] source ./loadgpuenv.sh
 [comet-ln3:~] module list
 Currently Loaded Modulefiles:
-  1) gnutools/2.69   2) cuda/7.0
+  1) loadcuda/7.0
 [comet-ln3:~] which nvcc
 /usr/local/cuda-7.0/bin/nvcc
 [user@comet-ln3:~] which mpirun
@@ -383,7 +389,6 @@ Next, we want to change the module environment so we can do MPI work. For this w
 #!/bin/bash
 source /etc/profile.d/modules.sh
 module purge
-module load gnutools
 module load intel mvapich2_ib
 ```
 
@@ -392,7 +397,7 @@ After running the script, we see that the modules no longer include and CUDA com
 [comet-ln3:~] source loadintelenv.sh
 [comet-ln3:~] module list
 Currently Loaded Modulefiles:
-  1) gnutools/2.69  2) intel/2013_sp1.2.144 3) mvapich2_ib/2.1
+  1) intel/2013_sp1.2.144 2) mvapich2_ib/2.1
 [comet-ln3:~] which mpicc
 /opt/mvapich2/intel/ib/bin/mpicc
 [comet-ln3:~] which nvcc
@@ -455,7 +460,6 @@ Default/Suggested Compilers to used based on programming model and languages:
 The Intel compilers and the MVAPICH2 MPI implementation will be loaded by default. If you have modified your environment, you can reload by executing the following commands at the Linux prompt or placing in your startup file (~/.cshrc or ~/.bashrc) or into a module load script (see above).
 ```
 module purge
-module load gnutools
 module load intel mvapich2_ib
 ```
 For AVX2 support, compile with the -xHOST option. Note that -xHOST alone does not enable aggressive optimization, so compilation with -O3 is also suggested. The -fast flag invokes -xHOST, but should be avoided since it also turns on interprocedural optimization (-ipo), which may cause problems in some instances.
@@ -497,7 +501,6 @@ The PGI compilers can be loaded by executing the following commands at the Linux
 
 ```
 module purge
-module load gnutools
 module load pgi mvapich2_ib
 ```
 
@@ -518,7 +521,6 @@ For more information on the PGI compilers: man [pgf90 | pgcc | pgCC]
 The GNU compilers can be loaded by executing the following commands at the Linux prompt or placing in your startup files (~/.cshrc or ~/.bashrc)
 ```
 module purge
-module load gnutools
 module load gnu openmpi_ib
 ```
 
@@ -629,11 +631,10 @@ you are using the right account.
 ```
 [user@comet-ln2 CUDA]$ module list
 [user@comet-ln2 CUDA]$ module purge
-[user@comet-ln2 CUDA]$ module load gnutools
 [user@comet-ln2 CUDA]$ module load cuda
 [user@comet-ln2 CUDA]$ module list
 Currently Loaded Modulefiles:
-  1) gnutools/2.69   2) cuda/7.0
+  1) cuda/7.0
 [user@comet-ln2 CUDA]$which nvcc
 /usr/local/cuda-7.0/bin/nvcc
 ```
@@ -1186,27 +1187,24 @@ Note: there are two directories that contain code needed to run the jobs in the 
 ```
 [username@comet-ln3 MPI]$ module list
 Currently Loaded Modulefiles:
-  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1        3) gnutools/2.69
+  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1
 ```
 * If you have trouble with your modules, you can remove them (purge) and then reload them. After purging, the PATH variable has fewer path directories available:
 ```
-[username@comet-ln3 ~]$ module purge
-[username@comet-ln3 ~]$ echo $PATH
-/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/home/username/bin
-[username@comet-ln3 ~]$  
-
+(base) [mthomas@comet-ln3:~] module purge
+(base) [mthomas@comet-ln3:~] echo $PATH
+/home/mthomas/miniconda3/bin:/home/mthomas/miniconda3/condabin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/mthomas/bin
 ```
 * Next, you reload the modules that you need:
 ```
 [username@comet-ln3 ~]$ module load intel
 [username@comet-ln3 ~]$ module load mvapich2_ib
-[username@comet-ln3 ~]$ module load gnutools
 [username@comet-ln3 ~]$
 ```
-* You will see that there are more paths in the list:
+* You will see that there are more binaries in the PATH:
 ```
-[username@comet-ln3 ~]$ echo $PATH
-/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/composer_xe_2013_sp1.2.144/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/mpirt/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/debugger/gdb/intel64_mic/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/home/username/bin
+(base) [mthomas@comet-ln3:~] echo $PATH
+/opt/mvapich2/intel/ib/bin:/opt/intel/2018.1.163/compilers_and_libraries_2018.1.163/linux/bin/intel64:/home/mthomas/miniconda3/bin:/home/mthomas/miniconda3/condabin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/mthomas/bin
 ```
 
 [Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
