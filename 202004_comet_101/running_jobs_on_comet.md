@@ -408,7 +408,7 @@ drwxr-xr-x 16 user use300       16 Aug  5 19:02 ..
 The file `compile.txt` contains the full command to compile the `pdpttr.c` program statically linking 64 bit scalapack libraries on Comet:
 ```
 [user@comet-14-01:~/comet-examples/comet101/MKL] cat compile.txt
-mpicc -o pdpttr.exe pdpttr.c  -I$MKL_ROOT/include ${MKL_ROOT}/lib/intel64/libmkl_scalapack_lp64.a -Wl,--start-group ${MKL_ROOT}/lib/intel64/libmkl_intel_lp64.a ${MKL_ROOT}/lib/intel64/libmkl_core.a ${MKL_ROOT}/lib/intel64/libmkl_sequential.a -Wl,--end-group ${MKL_ROOT}/lib/intel64/libmkl_blacs_intelmpi_lp64.a -lpthread -lm```
+mpicc -o pdpttr.exe pdpttr.c /opt/intel/2018.1.163/compilers_and_libraries_2018.1.163/linux/mkl/lib/intel64/libmkl_scalapack_lp64.a -Wl,--start-group /opt/intel/2018.1.163/compilers_and_libraries_2018.1.163/linux/mkl/lib/intel64/libmkl_intel_lp64.a /opt/intel/2018.1.163/compilers_and_libraries_2018.1.163/linux/mkl/lib/intel64/libmkl_sequential.a /opt/intel/2018.1.163/compilers_and_libraries_2018.1.163/linux/mkl/lib/intel64/libmkl_core.a /opt/intel/2018.1.163/compilers_and_libraries_2018.1.163/linux/mkl/lib/intel64/libmkl_blacs_intelmpi_lp64.a -Wl,--end-group -lpthread -lm -ldl
 ```
 
 Run the command:
