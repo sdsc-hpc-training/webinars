@@ -329,55 +329,8 @@ PATH=/opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/compose
 [Back to Top](#top)
 <hr>
 
-### <a name="module-load-scripts"></a>Using Scripts to Load Module Environments
 
-Use scripts to load your module environment. This will guarantee that the current working environment is what you want, and that you are not inheriting unwanted modules/applications. In order for the commands run inside a script (child shell) to change the parent shell, you must use the <b>`source`</b> command:
-
-A script for loading in a GPU/CUDA environment is shown below. The first thing it does is to purge out all modules, and then it loads in the GNU and GPU tools needed:
-```
-comet-ln3:~] cat loadgpuenv.sh
-#!/bin/bash
-source /etc/profile.d/modules.sh
-module purge
-module load cuda
-```
-
-Next, we  <b>`source`</b> this script, and check out the module environment. Note that the environment no longer includes <b>`mpirun`</b>, but does include the NVIDIA compiler command <b>`nvcc`</b>.
-```
-[comet-ln3:~] source ./loadgpuenv.sh
-[comet-ln3:~] module list
-Currently Loaded Modulefiles:
-  1) loadcuda/7.0
-[comet-ln3:~] which nvcc
-/usr/local/cuda-7.0/bin/nvcc
-[user@comet-ln3:~] which mpirun
-/usr/bin/which: no mpirun in (/opt/gnu/gcc/bin:usr/local/bin……..)
-```
-
-Next, we want to change the module environment so we can do MPI work. For this we need to clear out the GPU/CUDA environment and load in the INTEL compilers. The script for this is shown below:
-```
-[comet-ln3:~] cat loadintelenv.sh
-#!/bin/bash
-source /etc/profile.d/modules.sh
-module purge
-module load intel mvapich2_ib
-```
-
-After running the script, we see that the modules no longer include and CUDA commands, but the MPI commands like <b>`mpicc`</b> exist:
-```
-[comet-ln3:~] source loadintelenv.sh
-[comet-ln3:~] module list
-Currently Loaded Modulefiles:
-  1) intel/2013_sp1.2.144 2) mvapich2_ib/2.1
-[comet-ln3:~] which mpicc
-/opt/mvapich2/intel/ib/bin/mpicc
-[comet-ln3:~] which nvcc
-/usr/bin/which: no nvcc in (/opt/gnu/gcc/bin:usr/local/bin……..)
-```
-
-[Back to Top](#top)
-<hr>
-### <a name="module-error"></a>Module Error: command not found
+### <a name="module-error"></a>Troubleshooting:Module Error
 
 Sometimes this error is encountered when switching from one shell to another or attempting to run the module command from within a shell script or batch job. The module command may not be inherited between the shells.  To keep this from happening, execute the following command:
 ```
@@ -400,7 +353,7 @@ http://www.sdsc.edu/support/user_guides/comet.html#compiling
 
 Comet compute nodes support several parallel programming models:
 * __MPI__: Default: Intel
-   * Default Intel Compiler: intel/2013_sp1.2.144; Versions 2015.2.164 and 2016.3.210 available.
+   * Default Intel Compiler: intel/2018.1.163; Other versions available.
    * Other options: openmpi_ib/1.8.4 (and 1.10.2), Intel MPI, mvapich2_ib/2.1
    * mvapich2_gdr: GPU direct enabled version
 * __OpenMP__: All compilers (GNU, Intel, PGI) have OpenMP flags.
@@ -524,12 +477,12 @@ These nodes are meant for compilation, file editing, simple data analysis, and o
 ### <a name="running-jobs-slurm"></a>Running Jobs using SLURM
 
 * All jobs must be run via the Slurm scheduling infrastructure. There are two types of jobs:
-    * Interactive Jobs: Use `srun` command:
+    * Interactive Jobs: Use the `srun` command:
         ```
         srun --pty --nodes=1 --ntasks-per-node=24 -p debug -t 00:30:00 --wait 0 /bin/bash
         ```
-    * Batch Jobs: Submit batch scripts from the login nodes. Can set environment variables in the shell or in the batch script, including:
-        * Partition (also call qeueing system, details on upcoming slide)
+    * Batch Jobs: Submit batch scripts from the login nodes. You can set environment variables in the shell or in the batch script, including:
+        * Partition (also called the qeueing system)
         * Time limit for a job (maximum of 48 hours; longer on request)
         * Number of nodes, tasks per node
         * Memory requirements (if any)
