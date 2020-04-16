@@ -42,7 +42,7 @@ Requirements:
     * [Batch Jobs using SLURM](#running-jobs-slurm)
     * [Slurm Commands](#running-jobs-slurm-commands)
 
-* [Hands-on Examples](#putting-it-all-together)
+* [Hands-on Examples](#hands-on)
 * [Compiling and Running GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
     * [GPU Hello World (GPU) ](#hello-world-gpu)
         * [GPU Hello World: Compiling](#hello-world-gpu-compile)
@@ -608,8 +608,7 @@ $ squeue -u $USER
 [Back to Top](#top)
 <hr>
 
-## <a name="putting-it-all-together"></a>Putting it all Together
-
+## <a name="hands-on"></a>Hands-on Examples
 
 
 ## <a name="comp-and-run-cuda-jobs"></a>Compiling and Running GPU/CUDA Jobs
@@ -634,6 +633,7 @@ Currently Loaded Modulefiles:
 /usr/local/cuda-7.0/bin/nvcc
 ```
 
+[Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
 
@@ -1087,7 +1087,7 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 [Back to Top](#top)
 <hr>
 
-* [Compiling and Running CPU Jobs](#comp-and-run-cpu-jobs)
+## [Compiling and Running CPU Jobs](#comp-and-run-cpu-jobs)
 
 ### <a name="helloworld-mpi"></a>Hello World (MPI)
 
@@ -1173,8 +1173,7 @@ Currently Loaded Modulefiles:
 [username@comet-ln3 ~]$ echo $PATH
 /opt/gnu/gcc/bin:/opt/gnu/bin:/opt/mvapich2/intel/ib/bin:/opt/intel/composer_xe_2013_sp1.2.144/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/mpirt/bin/intel64:/opt/intel/composer_xe_2013_sp1.2.144/debugger/gdb/intel64_mic/bin:/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/home/username/bin
 ```
-
-[Back to Top](#top)
+c[Back to Top](#top)
 <hr>
 
 #### <a name="helloworld-mpi-compile"></a>Hello World (MPI): Compiling
