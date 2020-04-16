@@ -16,14 +16,14 @@ Requirements:
 <hr>
 
 <a name="top">Contents:
-* [Comet Overview](#overview)
-    * [Comet Architecture](#network-arch)
-    * [Comet File Systems](#file-systems)
-
 * [Getting Started - Comet System Environment](#sys-env)
     * [Comet Accounts](#comet-accounts)
     * [Logging Onto Comet](#comet-logon)
     * [Obtaining Example Code](#example-code)
+
+* [Comet Overview](#overview)
+    * [Comet Architecture](#network-arch)
+    * [Comet File Systems](#file-systems)
     
 * [Modules: Managing User Environments](#modules)
     * [Common module commands](#module-commands)
@@ -37,27 +37,13 @@ Requirements:
     * [Using the PGI Compilers](#compilers-pgi)
     * [Using the GNU Compilers](#compilers-gnu)
     
-* [Running Jobs on Comet](#running-jobs)
+* [Running Parallel Jobs on Comet](#running-jobs)
     * [Command Line Jobs](#running-jobs-cmdline)
     * [Batch Jobs using SLURM](#running-jobs-slurm)
     * [Slurm Commands](#running-jobs-slurm-commands)
 
 * [Hands-on Examples: CPU Computing](#putting-it-all-together)
-    * [Hello World (MPI)](#hello-world-mpi)
-        * [Hello World (MPI): Compiling](#helloworld-mpi-compile)
-        * [Hello World (MPI): Batch Script Submission](#helloworld-mpi-batch-submit)
-        * [Hello World (MPI): Batch Script Output](#helloworld-mpi-batch-output)
-    * [Hello World (OpenMP)](#helloworld-omp)
-        * [Hello World (OpenMP): Compiling](#helloworld-omp-compile)
-        * [Hello World (OpenMP): Interactive jobs](#helloworld-omp-interactive)
-        * [Hello World (OpenMP): Batch Script Submission](#helloworld-omp-batch-submit)
-        * [Hello World (OpenMP): Batch Script Output](#helloworld-omp-batch-output)
-    * [Running Hybrid (MPI + OpenMP) Jobs](#hybrid-mpi-omp)
-        * [Hybrid (MPI + OpenMP): Compiling](#hybrid-mpi-omp-compile)
-        * [Hybrid (MPI + OpenMP): Batch Script Submission](#hybrid-mpi-omp-batch-submit)
-        * [Hybrid (MPI + OpenMP): Batch Script Output](#hybrid-mpi-omp-output)
-
-* [Compiling and Running GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
+ [Compiling and Running GPU/CUDA Jobs](#comp-and-run-cuda-jobs)
     * [GPU Hello World (GPU) ](#hello-world-gpu)
         * [GPU Hello World: Compiling](#hello-world-gpu-compile)
         * [GPU Hello World: Batch Script Submission](#hello-world-gpu-batch-submit)
@@ -70,47 +56,20 @@ Requirements:
         * [Matrix Mult. (GPU): Compiling](#mat-mul-gpu-compile)
         * [Matrix Mult. (GPU): Batch Script Submission](#mat-mul-gpu-batch-submit)
         * [Matrix Mult. (GPU): Batch Job Output](#mat-mul-gpu-batch-output )
-
-[Back to Top](#top)
-<hr>
-
-## <a name="overview"></a>Comet Overview:
-
-### HPC for the "long tail of science:"
-* Designed and operated on the principle that the majority of computational research is performed at modest scale: large number jobs that run for less than 48 hours, but can be computationally intensvie and generate large amounts of data.
-* An NSF-funded system available through the eXtreme Science and Engineering Discovery Environment (XSEDE) program.
-* Also supports science gateways.
-
-<img src="images/comet-rack.png" alt="Comet Rack View" width="500px" />
-* ~67 TF supercomputer in a rack
-* 27 single-rack supercomputers
-
-
-<img src="images/comet-characteristics.png" alt="Comet System Characteristics" width="500px" />
-
-[Back to Top](#top)
-<hr>
-
-<a name="network-arch"></a><img src="images/comet-network-arch.png" alt="Comet Network Architecture" width="500px" />
-
-[Back to Top](#top)
-<hr>
-
-<a name="file-systems"></a><img src="images/comet-file-systems.png" alt="Comet File Systems" width="500px" />
-* Lustre filesystems – Good for scalable large block I/O
-    * Accessible from all compute and GPU nodes.
-    * /oasis/scratch/comet - 2.5PB, peak performance: 100GB/s. Good location for storing large scale scratch data during a job.
-    * /oasis/projects/nsf - 2.5PB, peak performance: 100 GB/s. Long term storage.
-    * *Not good for lots of small files or small block I/O.*
-
-* SSD filesystems
-    * /scratch local to each native compute node – 210GB on regular compute nodes, 285GB on GPU, large memory nodes, 1.4TB on selected compute nodes.
-    * SSD location is good for writing small files and temporary scratch files. Purged at the end of a job.
-
-* Home directories (/home/$USER)
-    * Source trees, binaries, and small input files.
-    * *Not good for large scale I/O.*
-
+[Compiling and Running CPU Jobs](#comp-and-run-cpu-jobs)      
+    * [Hello World (OpenMP)](#helloworld-omp)
+        * [Hello World (OpenMP): Compiling](#helloworld-omp-compile)
+        * [Hello World (OpenMP): Interactive jobs](#helloworld-omp-interactive)
+        * [Hello World (OpenMP): Batch Script Submission](#helloworld-omp-batch-submit)
+        * [Hello World (OpenMP): Batch Script Output](#helloworld-omp-batch-output)
+    * [Hello World (MPI)](#hello-world-mpi)
+        * [Hello World (MPI): Compiling](#helloworld-mpi-compile)
+        * [Hello World (MPI): Batch Script Submission](#helloworld-mpi-batch-submit)
+        * [Hello World (MPI): Batch Script Output](#helloworld-mpi-batch-output)
+    * [Running Hybrid (MPI + OpenMP) Jobs](#hybrid-mpi-omp)
+        * [Hybrid (MPI + OpenMP): Compiling](#hybrid-mpi-omp-compile)
+        * [Hybrid (MPI + OpenMP): Batch Script Submission](#hybrid-mpi-omp-batch-submit)
+        * [Hybrid (MPI + OpenMP): Batch Script Output](#hybrid-mpi-omp-output)
 
 [Back to Top](#top)
 <hr>
@@ -246,6 +205,49 @@ Most examples will contain source code, along with a batch script example so you
 
 [Back to Top](#top)
 <hr>
+
+## <a name="overview"></a>Comet Overview:
+
+### HPC for the "long tail of science:"
+* Designed and operated on the principle that the majority of computational research is performed at modest scale: large number jobs that run for less than 48 hours, but can be computationally intensvie and generate large amounts of data.
+* An NSF-funded system available through the eXtreme Science and Engineering Discovery Environment (XSEDE) program.
+* Also supports science gateways.
+
+<img src="images/comet-rack.png" alt="Comet Rack View" width="500px" />
+* ~67 TF supercomputer in a rack
+* 27 single-rack supercomputers
+
+
+<img src="images/comet-characteristics.png" alt="Comet System Characteristics" width="500px" />
+
+[Back to Top](#top)
+<hr>
+
+<a name="network-arch"></a><img src="images/comet-network-arch.png" alt="Comet Network Architecture" width="500px" />
+
+[Back to Top](#top)
+<hr>
+
+<a name="file-systems"></a><img src="images/comet-file-systems.png" alt="Comet File Systems" width="500px" />
+* Lustre filesystems – Good for scalable large block I/O
+    * Accessible from all compute and GPU nodes.
+    * /oasis/scratch/comet - 2.5PB, peak performance: 100GB/s. Good location for storing large scale scratch data during a job.
+    * /oasis/projects/nsf - 2.5PB, peak performance: 100 GB/s. Long term storage.
+    * *Not good for lots of small files or small block I/O.*
+
+* SSD filesystems
+    * /scratch local to each native compute node – 210GB on regular compute nodes, 285GB on GPU, large memory nodes, 1.4TB on selected compute nodes.
+    * SSD location is good for writing small files and temporary scratch files. Purged at the end of a job.
+
+* Home directories (/home/$USER)
+    * Source trees, binaries, and small input files.
+    * *Not good for large scale I/O.*
+
+
+[Back to Top](#top)
+<hr>
+
+
 
 ## <a name="modules"></a>Modules: Customizing Your User Environment
 The Environment Modules package provides for dynamic modification of your shell environment. Module commands set, change, or delete environment variables, typically in support of a particular application. They also let the user choose between different versions of the same software or different combinations of related codes. See:
