@@ -252,7 +252,7 @@ Currently Loaded Modulefiles:
 
 ```
 $ module av
-base) [mthomas@comet-ln3:~] module av
+[mthomas@comet-ln3:~] module av
 
 ------------------------- /opt/modulefiles/mpi/.intel --------------------------
 mvapich2_gdr/2.3.2(default)
@@ -870,7 +870,7 @@ Max grid dimensions: (2147483647, 65535, 65535)
 
 The output will show information for two devices:
 ```
-base) [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] sbatch gpu_enum.sb
+[mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] sbatch gpu_enum.sb
 !Submitted batch job 32663404
 [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] squeue -u mthomas
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
@@ -1053,7 +1053,7 @@ Change to the MPI examples directory (assuming you already copied the ):
 ```
 [mthomas@comet-ln3 comet101]$ cd MPI
 [mthomas@comet-ln3 MPI]$ ll
-base) [mthomas@comet-ln3:~/comet101/MPI] ll
+[mthomas@comet-ln3:~/comet101/MPI] ll
 total 498
 drwxr-xr-x 4 mthomas use300      7 Apr 16 01:11 .
 drwxr-xr-x 6 mthomas use300      6 Apr 15 20:10 ..
@@ -1078,7 +1078,7 @@ drwxr-xr-x 2 mthomas use300      3 Apr 16 00:57 MPIRUN_RSH
 Compile the code:
 ```
 [mthomas@comet-ln3 MPI]$ mpif90 -o hello_mpi hello_mpi.f90
-base) [mthomas@comet-ln3:~/comet101/MPI] ll
+[mthomas@comet-ln3:~/comet101/MPI] ll
 total 498
 drwxr-xr-x 4 mthomas use300      7 Apr 16 01:11 .
 drwxr-xr-x 6 mthomas use300      6 Apr 15 20:10 ..
