@@ -1131,15 +1131,15 @@ Change to the MPI examples directory (assuming you already copied the ):
 ```
 [mthomas@comet-ln3 comet101]$ cd MPI
 [mthomas@comet-ln3 MPI]$ ll
-total 461
-drwxr-xr-x  4 username use300      6 Aug  5 19:02 .
-drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
--rwxr-xr-x  1 username use300 721912 Aug  5 19:02 hello_mpi
--rw-r--r--  1 username use300    328 Aug  5 19:02 hello_mpi.f90
-drwxr-xr-x  2 username use300      3 Aug  5 19:02 IBRUN
-drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH
+base) [mthomas@comet-ln3:~/comet101/MPI] ll
+total 498
+drwxr-xr-x 4 mthomas use300      7 Apr 16 01:11 .
+drwxr-xr-x 6 mthomas use300      6 Apr 15 20:10 ..
+-rw-r--r-- 1 mthomas use300    336 Apr 15 15:47 hello_mpi.f90
+drwxr-xr-x 2 mthomas use300      3 Apr 16 01:02 IBRUN
+drwxr-xr-x 2 mthomas use300      3 Apr 16 00:57 MPIRUN_RSH
 ``
-[mthomas@comet-ln3 OPENMP]$cat ../MPI/hello_mpi.f90
+[mthomas@comet-ln3 OPENMP]$cat hello_mpi.f90
 !  Fortran example  
    program hello
    include 'mpif.h'
@@ -1151,45 +1151,30 @@ drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH
    print*, 'node', rank, ': Hello and Welcome to Webinar Participants!'
    call MPI_FINALIZE(ierror)
    end
-   ```
+```
 
-* Note that there is already a compiled version of the `hello_mpi.f90` code. If you try to run this from the command line, in the current environment, it will fail:
+Compile the code:
 ```
-[[mthomas@comet-ln3 MPI]$ mpirun -np 4 ./hello_mpi
-LiMIC: (limic_open) file open fail
-LiMIC: (limic_open) file open fail
-LiMIC: (limic_open) file open fail
-LiMIC: (limic_open) file open fail
-[cli_0]: aborting job:
-Fatal error in MPI_Init:
-Other MPI error, error stack:
-MPIR_Init_thread(514)....:
-MPID_Init(359)...........: channel initialization failed
-MPIDI_CH3_Init(446)......:
-MPIDI_CH3I_SMP_Init(2313): LiMIC2 device does not exist: No such file or directory
+[mthomas@comet-ln3 MPI]$ mpif90 -o hello_mpi hello_mpi.f90
+base) [mthomas@comet-ln3:~/comet101/MPI] ll
+total 498
+drwxr-xr-x 4 mthomas use300      7 Apr 16 01:11 .
+drwxr-xr-x 6 mthomas use300      6 Apr 15 20:10 ..
+-rw-r--r-- 1 mthomas use300     77 Apr 16 01:08 compile.txt
+-rwxr-xr-x 1 mthomas use300 750288 Apr 16 01:11 hello_mpi
+-rw-r--r-- 1 mthomas use300    336 Apr 15 15:47 hello_mpi.f90
+drwxr-xr-x 2 mthomas use300      3 Apr 16 01:02 IBRUN
+drwxr-xr-x 2 mthomas use300      3 Apr 16 00:57 MPIRUN_RSH
 ```
-We will use the SLURM job scheduler to run this code (see batch jobs below).
-We will make a new compiled version, so you can back this file up to use for testing/checking your work:
-```
-[mthomas@comet-ln3 MPI]$ mv hello_mpi hello_mpi.bak
-[mthomas@comet-ln3 MPI]$ ls -al
-total 863
-drwxr-xr-x  4 username use300      7 Aug  5 19:11 .
-drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
--rwxr-xr-x  1 username use300 721912 Aug  5 19:11 hello_mpi.bak
--rw-r--r--  1 username use300    328 Aug  5 19:02 hello_mpi.f90
-drwxr-xr-x  2 username use300      3 Aug  5 19:02 IBRUN
-drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH
-```
-Note: there are two directories that contain code needed to run the jobs in the parallel/slurm environment. Please don't change or edit them at this time.
+Note: The two directories that contain batch scripts needed to run the jobs using the parallel/slurm environment.
 
 * First, we should verify that the user environment is correct for running the examples we will work with in this tutorial.
 ```
 [mthomas@comet-ln3 MPI]$ module list
 Currently Loaded Modulefiles:
-  1) intel/2013_sp1.2.144   2) mvapich2_ib/2.1
+1) intel/2018.1.163    2) mvapich2_ib/2.3.2
 ```
-* If you have trouble with your modules, you can remove them (purge) and then reload them. After purging, the PATH variable has fewer path directories available:
+* If you have trouble with your modules, you can remove the existing environment (purge) and then reload them. After purging, the PATH variable has fewer path directories available:
 ```
 (base) [mthomas@comet-ln3:~] module purge
 (base) [mthomas@comet-ln3:~] echo $PATH
@@ -1199,7 +1184,6 @@ Currently Loaded Modulefiles:
 ```
 [mthomas@comet-ln3 ~]$ module load intel
 [mthomas@comet-ln3 ~]$ module load mvapich2_ib
-[mthomas@comet-ln3 ~]$
 ```
 * You will see that there are more binaries in the PATH:
 ```
@@ -1214,7 +1198,7 @@ Currently Loaded Modulefiles:
 #### <a name="hello-world-mpi-compile"></a>Hello World (MPI): Compiling
 
 * Compile the MPI hello world code.
-* For this, we use the command `mpif90`, which is loaded into your environment when you loaded the modules above.
+* For this, we use the command `mpif90`, which is loaded into your environment when you loaded the intel module above.
 * To see where the command is located, use the `which` command:
 ```
 [mthomas@comet-ln3 MPI]$ which mpif90
@@ -1228,16 +1212,19 @@ mpif90 -o hello_mpi hello_mpi.f90
 * Verify that the executable has been created:
 
 ```
-[mthomas@comet-ln3 MPI]$ ll -al
-total 854
-drwxr-xr-x  4 username use300      7 Aug  5 19:18 .
-drwxr-xr-x 16 username use300     16 Aug  5 19:02 ..
--rwxr-xr-x  1 username use300 721912 Aug  5 19:18 hello_mpi
--rwxr-xr-x  1 username use300 721912 Aug  5 19:11 hello_mpi.bak
--rw-r--r--  1 username use300    328 Aug  5 19:02 hello_mpi.f90
-drwxr-xr-x  2 username use300      3 Aug  5 19:02 IBRUN
-drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH
+(base) [mthomas@comet-ln3:~/comet101/MPI] ll
+total 498
+drwxr-xr-x 4 mthomas use300      7 Apr 16 01:11 .
+drwxr-xr-x 6 mthomas use300      6 Apr 15 20:10 ..
+-rwxr-xr-x 1 mthomas use300 750288 Apr 16 01:11 hello_mpi
+-rw-r--r-- 1 mthomas use300    336 Apr 15 15:47 hello_mpi.f90
+drwxr-xr-x 2 mthomas use300      3 Apr 16 01:02 IBRUN
+drwxr-xr-x 2 mthomas use300      3 Apr 16 00:57 MPIRUN_RSH
 ```
+
+* In the next sections, we will see how to run parallel code using two environments:
+   * Running a parallel job on an _Interactive_ compute node
+   * Running parallel code using the batch queue system
 
 [Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
@@ -1248,14 +1235,19 @@ drwxr-xr-x  2 username use300      3 Aug  5 19:02 MPIRUN_RSH
 * To run MPI (or other executables) from the command line, you need to use the "Interactive" nodes.
 * To launch the nodes (to get allocated a set of nodes), use the `srun` command. This example will request one node, all 24 cores, in the debug partition for 30 minutes:
 ```
-[mthomas@comet-ln3 MPI]$ date
-Sun Aug  5 22:54:04 PDT 2018
-[mthomas@comet-ln3 MPI]$ srun --pty --nodes=1 --ntasks-per-node=24 -p debug -t 00:30:00 --wait 0 /bin/bash
-[mthomas@comet-14-01 MPI]$ date
-Sun Aug  5 22:54:20 PDT 2018
+(base) [mthomas@comet-ln3:~/comet101/MPI] date
+Thu Apr 16 01:21:48 PDT 2020
+(base) [mthomas@comet-ln3:~/comet101/MPI] srun --pty --nodes=1 --ntasks-per-node=24 -p debug -t 00:30:00 --wait 0 /bin/bash
+(base) [mthomas@comet-14-01:~/comet101/MPI] date
+Thu Apr 16 01:22:42 PDT 2020
+(base) [mthomas@comet-14-01:~/comet101/MPI] hostname
+comet-14-01.sdsc.edu
 ```
-* If the cluster is very busy, it may take some time to obtain the nodes. Always check that your module environment is correct.
-* Once you have the interactive session, your MPI code will be allowed to execute correctly.
+* Note:
+   * You will know when you have an interactive node because the srun command
+   will return and you will be on a different host.
+   * Note:  If the cluster is very busy, it may take some time to obtain the nodes.  
+* Once you have the interactive session, your MPI code will be allowed to execute on the command line.
 ```
 [mthomas@comet-14-01 MPI]$ mpirun -np 4 ./hello_mpi
  node           0 : Hello and Welcome to Webinar Participants!
@@ -1264,12 +1256,16 @@ Sun Aug  5 22:54:20 PDT 2018
  node           3 : Hello and Welcome to Webinar Participants!
 [mthomas@comet-14-01 MPI]$
 ```
+
+When you done testing code, exit the Interactive session.
+
 [Back to CPU Jobs](#comp-and-run-cpu-jobs) <br>
 [Back to Top](#top)
 <hr>
 
 #### <a name="hello-world-mpi-batch-submit"></a>Hello World (MPI): Batch Script Submission
-To submit jobs to the Slurm queuing system, you need to create a slurm batch job script.
+To submit jobs to the Slurm queuing system, you need to create a slurm batch job script and
+submit it to the queuing system.
 
 * Change directories to the IBRUN directory using the `hellompi-slurm.sb` batch script:
 ```
@@ -1282,7 +1278,7 @@ To submit jobs to the Slurm queuing system, you need to create a slurm batch job
 #SBATCH --nodes=2
 #SBATCH --ntasks-per-node=24
 #SBATCH --export=ALL
-#SBATCH -t 01:30:00
+#SBATCH -t 00:30:00
 
 #This job runs with 2 nodes, 24 cores per node for a total of 48 cores.
 #ibrun in verbose mode will give binding detail
@@ -1293,9 +1289,9 @@ ibrun -v ../hello_mpi
 * to run the job, use the command below:
 ```
 [mthomas@comet-ln3 IBRUN]$ sbatch hellompi.sb
-Submitted batch job 18343608
+Submitted batch job 32662205
 ```
-* For this class, we will be submitting our jobs to a reservation queue, use the `sbatch` script below:
+* In some cases, you may have access to a reservation queue, use the command below:
 ```    
 sbatch --res=SI2018DAY1 hellompi-slurm.sb
 ```
@@ -1311,15 +1307,15 @@ sbatch --res=SI2018DAY1 hellompi-slurm.sb
 [mthomas@comet-ln3 IBRUN]$ sbatch hellompi-slurm.sb; squeue -u username
 Submitted batch job 18345138
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-          18345138   compute hellompi  username PD       0:00      2 (None)
+          32662205   compute hellompi  username PD       0:00      2 (None)
 ....
 
 [mthomas@comet-ln3 IBRUN]$ squeue -u username
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-          18345138   compute hellompi  username  R       0:07      2 comet-21-[47,57]
+          32662205   compute hellompi  username  R       0:07      2 comet-21-[47,57]
 [mthomas@comet-ln3 IBRUN]$ squeue -u username
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-          18345138   compute hellompi  username CG       0:08      2 comet-21-[47,57]
+          32662205   compute hellompi  username CG       0:08      2 comet-21-[47,57]
 ```
     * Note: You will see the `ST` column information change when the job status changes: new jobs go into  `SP` (pending); after some time it moves to  `R` (running): when completed, the state changes to `CG` (completed)
     * the JOBID is the job identifer and can be used to track or cancel the job. It is also used as part of the output file name.
@@ -1328,16 +1324,15 @@ Submitted batch job 18345138
 ```
 [mthomas@comet-ln3 IBRUN]$
 total 48
-drwxr-xr-x 2 username use300    5 Aug  5 19:30 .
-drwxr-xr-x 4 username use300    7 Aug  5 19:22 ..
--rw-r--r-- 1 username use300 3865 Aug  5 19:30 hellompi.18345138.comet-10-58.out
--rw-r--r-- 1 username use300  342 Aug  5 19:30 hellompi.sb
--rw-r--r-- 1 username use300  341 Aug  5 19:27 hellompi-slurm.sb
+drwxr-xr-x 2 mthomas use300    4 Apr 16 01:31 .
+drwxr-xr-x 4 mthomas use300    7 Apr 16 01:11 ..
+-rw-r--r-- 1 mthomas use300 2873 Apr 16 01:31 hellompi.32662205.comet-20-03.out
+-rw-r--r-- 1 mthomas use300  341 Apr 16 01:30 hellompi-slurm.sb
 ```
 
 * To see the contents of the output file, use the `cat` command:
 ```
-[mthomas@comet-ln3 IBRUN]$ cat hellompi.18345138.comet-10-58.out
+[mthomas@comet-ln3 IBRUN]$ cat hellompi.32662205.comet-20-03.out
 IBRUN: Command is ../hello_mpi
 IBRUN: Command is /home/username/comet-examples/comet101/MPI/hello_mpi
 IBRUN: no hostfile mod needed
@@ -1545,7 +1540,7 @@ Submitted batch job 32661678
 
 * Once the job is finished:
 ```
-[mthomas@comet-ln2 OPENMP] cat hello_openmp.32661678.comet-07-47.out 
+[mthomas@comet-ln2 OPENMP] cat hello_openmp.32661678.comet-07-47.out
  Hello from Thread Number[           5 ] and Welcome HPC Trainees!
  Hello from Thread Number[           7 ] and Welcome HPC Trainees!
  Hello from Thread Number[          16 ] and Welcome HPC Trainees!
