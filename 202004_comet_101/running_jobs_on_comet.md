@@ -3,13 +3,13 @@
 Presented by Mary Thomas (SDSC,  <mpthomas@ucsd.edu> )
 <hr>
 In this tutorial, you will learn how to compile and run jobs on Comet, where to run them, and how to run batch jobs.
-The commands below can be cut & pasted into the terminal window which is connected to comet.sdsc.edu. For instructions on how to do this, see the tutorial on [Connecting to SDSC HPC Systems](https://github.com/sdsc-hpc-training/basic_skills/tree/master/connecting_to_hpc_systems)
+The commands below can be cut & pasted into the terminal window, which is connected to comet.sdsc.edu. For instructions on how to do this, see the tutorial on how to use a terminal application and SSH go connect to an SDSC HPC system: https://github.com/sdsc-hpc-training/basic_skills/tree/master/connecting_to_hpc_systems)
 
 Requirements:
 * You must have a comet account in order to access the system.
     * To obtain a trial account:  http://www.sdsc.edu/support/user_guides/comet.html#trial_accounts
 * You must be familiar with running basic Unix commands: see the following tutorials at:
-    * https://github.com/marypthomas/sdsc-training/tree/master/introduction-to-running-jobs-on-comet/preparation
+    * https://github.com/sdsc-hpc-training/basic_skills
 * Note: The `hostname` for Comet is `comet.sdsc.edu`
 
 <em>If you have any difficulties completing these tasks, please contact SDSC Consulting group at <consult@sdsc.edu>.</em>
