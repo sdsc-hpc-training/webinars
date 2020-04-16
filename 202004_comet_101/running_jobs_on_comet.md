@@ -1,9 +1,9 @@
-# SDSC 2018 Webinar Series Topic: Introduction to Running Jobs on Comet 
+# Comet 101: Introduction to Running Jobs on Comet Supercomputer 
 
 Presented by Mary Thomas (SDSC,  <mpthomas@ucsd.edu> )
 <hr>
 In this tutorial, you will learn how to compile and run jobs on Comet, where to run them, and how to run batch jobs.
-The commands below can be cut & pasted into the comet terminal window.
+The commands below can be cut & pasted into the terminal window which is connected to comet.sdsc.edu. For instructions on how to do this, see the tutorial on [Connecting to SDSC HPC Systems](https://github.com/sdsc-hpc-training/basic_skills/tree/master/connecting_to_hpc_systems)
 
 Requirements:
 * You must have a comet account in order to access the system. 
