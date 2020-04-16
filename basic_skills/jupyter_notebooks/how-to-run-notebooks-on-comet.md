@@ -81,13 +81,17 @@ The next step is to load the singularity module that knows about system wide sup
 (base) [mthomas@comet-14-03:~/comet101] which ipython
 ~/miniconda3/bin/ipython
 ```
-Once I launch the Singularity container, the `ipython` command location changes, and we are now using the version supported by system admins.
+Once the Singularity container is launched, the `ipython` command location changes, and we are now using the version supported by system admins.
 ```
-(base) [mthomas@comet-14-03:~/comet101] singularity shell /share/apps/compute/singularity/images/jupyter/jupyter-cpu.simg
+(base) [mthomas@comet-14-03:~/comet101] singularity shell /share/apps/compute/singularity/images/[SING_IMG]
 Singularity> which ipython
-/opt/anaconda3/bin/ipython
+/opt/miniconda3/bin/ipython
 ```
 
+* April 16, 2020: use these images:
+    * /share/apps/compute/singularity/images/pytorch/pytorch-cpu.simg
+    * /share/apps/compute/singularity/images/tensorflow/tensorflow-cpu.simg
+    
 You should also notice that you are in a new shell by the new prompt and that your environment is different:
 ```
 Singularity> 
