@@ -151,10 +151,10 @@ drwxr-xr-x   2 user use300     2 Jul 17 20:20 comet-examples
 [comet-ln2 comet-examples]$
 ```
 
-* Copy the `PHYS244 directory` from the /examples directory to your 'comet-examples' directory, which is located in your home (`/home/username`) directory. Note: you should have completed the creation of this directory as part of the *Getting Started* and *Basic Skills* preparation work:
+* Copy the `comet101 directory` from the /examples directory to your 'comet-examples' directory, which is located in your home (`/home/username`) directory. Note: you should have completed the creation of this directory as part of the *Getting Started* and *Basic Skills* preparation work:
 https://github.com/sdsc/sdsc-summer-institute-2018/tree/master/0_preparation
 ```
-[username@comet-ln3 ~]$ ls -al /share/apps/examples/PHYS244/
+[username@comet-ln3 ~]$ ls -al /share/apps/examples/comet101/
 total 64
 drwxr-xr-x 16 mahidhar use300 4096 Apr 24 21:57 .
 drwxrwxr-x 58 mahidhar use300 4096 Jul 29 11:36 ..
@@ -173,17 +173,17 @@ drwxr-xr-x  3 mahidhar use300 4096 Apr 19 13:11 pytorch
 drwxr-xr-x  4 mahidhar use300 4096 Apr 19 13:11 SPARK
 drwxr-xr-x  4 mahidhar use300 4096 Apr 19 13:14 TensorFlow
 ```
-Copy the 'PHYS244' directory into your `comet-examples` directory:
+Copy the 'comet101' directory into your `comet-examples` directory:
 ```
 [username@comet-ln3 ~]$
-[username@comet-ln3 ~]$ cp -r /share/apps/examples/PHYS244/ comet-examples/
+[username@comet-ln3 ~]$ cp -r /share/apps/examples/comet101/ comet-examples/
 [username@comet-ln3 ~]$ ls -al comet-examples/
 total 105
 drwxr-xr-x  5 username use300   6 Aug  5 19:02 .
 drwxr-x--- 10 username use300  27 Aug  5 17:59 ..
-drwxr-xr-x 16 username use300  16 Aug  5 19:02 PHYS244
-[username@comet-ln3 ~]$ cd comet-examples/PHYS244/
-[username@comet-ln3 PHYS244]$ ls -al
+drwxr-xr-x 16 username use300  16 Aug  5 19:02 comet101
+[username@comet-ln3 ~]$ cd comet-examples/comet101/
+[username@comet-ln3 comet101]$ ls -al
 total 212
 drwxr-xr-x 16 username use300 16 Aug  5 19:02 .
 drwxr-xr-x  5 username use300  6 Aug  5 19:02 ..
@@ -464,9 +464,9 @@ Intel MKL libraries are available as part of the "intel" modules on Comet. Once 
 
 In the example below, we are working with the HPC examples that can be found in
 ```
-[user@comet-14-01:~/comet-examples/PHYS244/MKL] pwd
-/home/user/comet-examples/PHYS244/MKL
-[user@comet-14-01:~/comet-examples/PHYS244/MKL] ls -al
+[user@comet-14-01:~/comet-examples/comet101/MKL] pwd
+/home/user/comet-examples/comet101/MKL
+[user@comet-14-01:~/comet-examples/comet101/MKL] ls -al
 total 25991
 drwxr-xr-x  2 user use300        9 Nov 25 17:20 .
 drwxr-xr-x 16 user use300       16 Aug  5 19:02 ..
@@ -479,13 +479,13 @@ drwxr-xr-x 16 user use300       16 Aug  5 19:02 ..
 
 The file `compile.txt` contains the full command to compile the `pdpttr.c` program statically linking 64 bit scalapack libraries on Comet:
 ```
-[user@comet-14-01:~/comet-examples/PHYS244/MKL] cat compile.txt
+[user@comet-14-01:~/comet-examples/comet101/MKL] cat compile.txt
 mpicc -o pdpttr.exe pdpttr.c  -I$MKL_ROOT/include ${MKL_ROOT}/lib/intel64/libmkl_scalapack_lp64.a -Wl,--start-group ${MKL_ROOT}/lib/intel64/libmkl_intel_lp64.a ${MKL_ROOT}/lib/intel64/libmkl_core.a ${MKL_ROOT}/lib/intel64/libmkl_sequential.a -Wl,--end-group ${MKL_ROOT}/lib/intel64/libmkl_blacs_intelmpi_lp64.a -lpthread -lm```
 ```
 
 Run the command:
 ```
-[user@comet-14-01:~/comet-examples/PHYS244/MKL] mpicc -o pdpttr.exe pdpttr.c  -I$MKL_ROOT/include ${MKL_ROOT}/lib/intel64/libmkl_scalapack_lp64.a -Wl,--start-group ${MKL_ROOT}/lib/intel64/libmkl_intel_lp64.a ${MKL_ROOT}/lib/intel64/libmkl_core.a ${MKL_ROOT}/lib/intel64/libmkl_sequential.a -Wl,--end-group ${MKL_ROOT}/lib/intel64/libmkl_blacs_intelmpi_lp64.a -lpthread -lm
+[user@comet-14-01:~/comet-examples/comet101/MKL] mpicc -o pdpttr.exe pdpttr.c  -I$MKL_ROOT/include ${MKL_ROOT}/lib/intel64/libmkl_scalapack_lp64.a -Wl,--start-group ${MKL_ROOT}/lib/intel64/libmkl_intel_lp64.a ${MKL_ROOT}/lib/intel64/libmkl_core.a ${MKL_ROOT}/lib/intel64/libmkl_sequential.a -Wl,--end-group ${MKL_ROOT}/lib/intel64/libmkl_blacs_intelmpi_lp64.a -lpthread -lm
 ```
 For more information on the Intel compilers run: [ifort | icc | icpc] -help
 
@@ -1002,7 +1002,7 @@ Max grid dimensions: (2147483647, 65535, 65535)
 #### <a name="mat-mul-gpu"></a>CUDA Example: Matrix-Multiplication
 <b>Change to the CUDA Matrix-Multiplication example directory:</b>
 ```
-[user@comet-ln2/comet-examples/PHYS244]$ cd /home/user/comet-examples/PHYS244/CUDA
+[user@comet-ln2/comet-examples/comet101]$ cd /home/user/comet-examples/comet101/CUDA
 [user@comet-ln2 CUDA]$ ls -al
 total 427
 drwxr-xr-x  2 user user300     11 Aug  5 19:02 .
@@ -1111,7 +1111,7 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 [Back to Top](#top)
 <hr>
 
- 
+
 ## <a name="comp-and-run-cpu-jobs"></a> Compiling and Running CPU Jobs
 <b>Sections:</b>
 * [Hello World (MPI)](#hello-world-mpi)
@@ -1128,7 +1128,7 @@ NOTE: The CUDA Samples are not meant for performance measurements. Results may v
 
 Change to the MPI examples directory (assuming you already copied the ):
 ```
-[username@comet-ln3 PHYS244]$ cd MPI
+[username@comet-ln3 comet101]$ cd MPI
 [username@comet-ln3 MPI]$ ll
 total 461
 drwxr-xr-x  4 username use300      6 Aug  5 19:02 .
@@ -1341,7 +1341,7 @@ drwxr-xr-x 4 username use300    7 Aug  5 19:22 ..
 ```
 [username@comet-ln3 IBRUN]$ cat hellompi.18345138.comet-10-58.out
 IBRUN: Command is ../hello_mpi
-IBRUN: Command is /home/username/comet-examples/PHYS244/MPI/hello_mpi
+IBRUN: Command is /home/username/comet-examples/comet101/MPI/hello_mpi
 IBRUN: no hostfile mod needed
 IBRUN: Nodefile is /tmp/0p4Nbx12u1
 
@@ -1355,7 +1355,7 @@ IBRUN: Adding MV2_USE_HUGEPAGES=0 to the environment
 IBRUN: Adding MV2_HOMOGENEOUS_CLUSTER=0 to the environment
 IBRUN: Adding MV2_USE_UD_HYBRID=0 to the environment
 IBRUN: Added 8 new environment variables to the execution environment
-IBRUN: Command string is [mpirun_rsh -np 48 -hostfile /tmp/0p4Nbx12u1 -export-all /home/username/comet-examples/PHYS244/MPI/hello_mpi]
+IBRUN: Command string is [mpirun_rsh -np 48 -hostfile /tmp/0p4Nbx12u1 -export-all /home/username/comet-examples/comet101/MPI/hello_mpi]
  node          18 : Hello and Welcome to Webinar Participants!
  node          17 : Hello and Welcome to Webinar Participants!
  node          20 : Hello and Welcome to Webinar Participants!
@@ -1421,7 +1421,7 @@ IBRUN: Job ended with value 0
 
 Change to the OPENMP examples directory:
 ```
-[username@comet-ln3 PHYS244]$ cd OPENMP/
+[username@comet-ln3 comet101]$ cd OPENMP/
 [username@comet-ln3 OPENMP]$ ls -al
 total 479
 drwxr-xr-x  2 username use300      6 Aug  5 22:19 .
@@ -1585,7 +1585,7 @@ Several HPC codes use a hybrid MPI, OpenMP approach.
 * Change to the HYBRID examples directory:
 
 ```
-[username@comet-ln2 PHYS244]$ cd HYBRID/
+[username@comet-ln2 comet101]$ cd HYBRID/
 [username@comet-ln2 HYBRID]$ ll
 total 94
 drwxr-xr-x  2 username use300      5 Aug  5 19:02 .
