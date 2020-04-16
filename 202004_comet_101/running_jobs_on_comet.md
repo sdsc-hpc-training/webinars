@@ -622,23 +622,25 @@ $ squeue -u $USER
 
 Note: Comet provides both NVIDIA K80 and P100 GPU-based resources. These GPU nodes
 are allocated as separate resources. Make sure you have enough allocations and that
-you are using the right account. For more details and current inforation about the
+you are using the right account. For more details and current information about the
 Comet GPU nodes, see the [Comet User Guide](https://www.sdsc.edu/support/user_guides/comet.html#gpu).
 
 <b> Comet GPU Hardware: </b> <br>
 <a name="gpu-hardware"></a><img src="images/comet-gpu-hardware.png" alt="Comet GPU Hardware" width="500px" />
 
-## Load the CUDA module:
-
+## In order to compile the CUDA code, you need to load the CUDA module and verify
+that you have access to the CUDA compile command, `nvcc:`
 ```
-[user@comet-ln2 CUDA]$ module list
-[user@comet-ln2 CUDA]$ module purge
-[user@comet-ln2 CUDA]$ module load cuda
-[user@comet-ln2 CUDA]$ module list
+(base) [mthomas@comet-ln3:~/comet101] module list
 Currently Loaded Modulefiles:
-  1) cuda/7.0
-[user@comet-ln2 CUDA]$which nvcc
-/usr/local/cuda-7.0/bin/nvcc
+  1) intel/2018.1.163    2) mvapich2_ib/2.3.2
+(base) [mthomas@comet-ln3:~/comet101] module purge
+(base) [mthomas@comet-ln3:~/comet101] module load cuda
+(base) [mthomas@comet-ln3:~/comet101] module list
+Currently Loaded Modulefiles:
+  1) cuda/10.1
+  (base) [mthomas@comet-ln3:~/comet101] which nvcc
+  /usr/local/cuda-10.1/bin/nvcc
 ```
 
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
@@ -653,39 +655,38 @@ Currently Loaded Modulefiles:
 
 #### <a name="hello-world-gpu-compile"></a>GPU Hello World: Compiling
 Simple hello runs a cuda command to get the device count
-on the node that job is assigned to:
+on the node that job is assigned to. :
 ```
-[comet-ln2:~/cuda/simple_hello] cat simple_hello.cu
-  1 /*
-  2 * simple_hello.cu
-  3 * Copyright 1993-2010 NVIDIA Corporation.
-  4 *    All right reserved
-  5 */
-  6 #include <stdio.h>
-  7 #include <stdlib.h>
-  8 int main( void )
-  9 {
- 10    int deviceCount;
- 11    cudaGetDeviceCount( &deviceCount );
- 12    printf("Hello, Physics 244 Class! You have %d devices\n", deviceCount );
- 13    return 0;
- 14 }
-[comet-ln2:~/cuda/simple_hello]
+(base) [mthomas@comet-ln3:~/comet101] cd CUDA/hello_cuda
+(base) [mthomas@comet-ln3:~/comet101/CUDA/hello_cuda] ll
+total 30
+drwxr-xr-x 2 mthomas use300   4 Apr 16 01:59 .
+drwxr-xr-x 4 mthomas use300  11 Apr 16 01:57 ..
+-rw-r--r-- 1 mthomas use300 313 Apr 16 01:59 hello_cuda.cu
+-rw-r--r-- 1 mthomas use300 269 Apr 16 01:58 hello_cuda.sb
+(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  cat hello_cuda.cu
+/*
+ * hello_cuda.cu
+ * Copyright 1993-2010 NVIDIA Corporation.
+ *    All right reserved
+ */
+ #include <stdio.h>
+ #include <stdlib.h>
+ int main( void )
+ {
+    int deviceCount;
+    cudaGetDeviceCount( &deviceCount );
+    printf("Hello, Webinar Participants! You have %d devices\n", deviceCount );
+    return 0;
+ }
 ```
-
-Check your environment and use the CUDA <b>`nvcc`</b> command:
+* Compile using the `nvcc`</b> command:
 ```
-[comet-ln2:~/cuda/gpu_enum] module purge
-[comet-ln2:~/cuda/gpu_enum] which nvcc
-/usr/bin/which: no nvcc in (/usr/lib64/qt-3.3/bin:/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin:/opt/sdsc/bin:/opt/sdsc/sbin:/opt/ibutils/bin:/usr/java/latest/bin:/opt/pdsh/bin:/opt/rocks/bin:/opt/rocks/sbin:/home/user/bin)
-[comet-ln2:~/cuda/gpu_enum] module load cuda
-[comet-ln2:~/cuda/gpu_enum] which nvcc
-/usr/local/cuda-7.0/bin/nvcc
-[comet-ln2:~/cuda/simple_hello] nvcc -o simple_hello simple_hello.cu
-[comet-ln2:~/cuda/simple_hello] ll simple_hello
--rwxr-xr-x 1 user use300 517437 Apr 10 19:35 simple_hello
--rw-r--r-- 1 user use300    304 Apr 10 19:35 simple_hello.cu
-[comet-ln2:~/cuda/simple_hello]
+(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  nvcc -o hello_cuda hello_cuda.cu
+(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  ll hello_cuda
+-rwxr-xr-x 1 user use300 517437 Apr 10 19:35 hello_cuda
+-rw-r--r-- 1 user use300    304 Apr 10 19:35 hello_cuda.cu
+[comet-ln2:~/cuda/hello_cuda]
 
 ```
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
@@ -694,7 +695,28 @@ Check your environment and use the CUDA <b>`nvcc`</b> command:
 
 #### <a name="hello-world-gpu-batch-submit"></a>GPU Hello World: Batch Script Submit
 
-GPU nodes can be accessed via either the "gpu" or the "gpu-shared" partitions:
+* GPU jobs can be run via the slurm scheduler, or on interactive nodes.
+* The slurm scheduler batch script is shown below:
+```
+(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  cat hello_cuda.sb
+#!/bin/bash
+#SBATCH --job-name="hello_cuda"
+#SBATCH --output="hello_cuda.%j.%N.out"
+#SBATCH --partition=gpu-shared
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=12
+#SBATCH --gres=gpu:2
+#SBATCH -t 01:00:00
+
+#Load the cuda module
+module load cuda
+
+#Run the job
+./hello_cuda
+```
+* Some of the batch script variables are described below. For more details see
+the Comet user guide.
+* GPU nodes can be accessed via either the "gpu" or the "gpu-shared" partitions:
 ```
 #SBATCH -p gpu           
 ```
@@ -703,7 +725,8 @@ or
 #SBATCH -p gpu-shared
 ```
 
-In addition to the partition namei (required), the type of gpui (optional) and the individual GPUs are scheduled as a resource.
+In addition to the partition name (required), the type of gpu (optional) and 
+the individual GPUs are scheduled as a resource.
 ```
 #SBATCH --gres=gpu[:type]:n
 ```
@@ -715,53 +738,25 @@ GPUs will be allocated on a first available, first schedule basis, unless specif
 #SBATCH --gres=gpu:p100:4 #only p100 nodes
 ```
 
-<b>Contents of the Slurm script</b>
-```
-[user@comet-ln2:~/cuda/simple_hello] cat simple_hello.sb
-#!/bin/bash
-#SBATCH --job-name="simple_hello"
-#SBATCH --output="simple_hello.%j.%N.out"
-#SBATCH --partition=gpu-shared          # define GPU partition
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=6
-####SBATCH --gres=gpu:1         # define type of GPU
-#SBATCH --gres=gpu:2         # first available
-#SBATCH -t 00:05:00
-
-#Load the cuda module
-echo "loading cuda module"
-module load cuda
-
-#print device information via command line
-echo "calling nvcc-smi"
-nvcc-smi
-
-#Run the job
-echo "calling simple hello"
-./simple_hello
-
-[user@comet-ln2:~/cuda/simple_hello]
-```
-
 <b>Submit the job</b> <br>
 
 To run the job, type the batch script submission command:
 ```
-[user@comet-ln2:~/cuda/simple_hello] sbatch simple_hello.sb
-Submitted batch job 22532827
-[user@comet-ln2:~/cuda/simple_hello]
+(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]  sbatch hello_cuda.sb
+Submitted batch job 32663172
+(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]
 
 ```
 
 <b>Monitor the job until it is finished:</b>
 ```
-[user@comet-ln2:~/cuda/simple_hello] squeue -u user
+[user@comet-ln2:~/cuda/hello_cuda] squeue -u mthomas
+(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello] sbatch hello_cuda.sb
+Submitted batch job 32663081
+(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello] squeue -u mthomas
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-          22532827 gpu-share simple_h  user PD       0:00      1 (Resources)
-[user@comet-ln2:~/cuda/simple_hello]
-
+          32663081 gpu-share hello_cu  mthomas PD       0:00      1 (Resources)
 ```
-
 
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
@@ -769,14 +764,13 @@ Submitted batch job 22532827
 
 #### <a name="hello-world-gpu-batch-output"></a>GPU Hello World: Batch Job Output
 ```
-[user@comet-ln2:~/cuda/simple_hello] cat simple_hello.22532827.comet-33-06.out
-loading cuda module
+(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello] cat hello_cuda.32663172.comet-30-04.out
 
-Hello, HPC Students! You have 2 devices
+Hello, Webinar Participants! You have 2 devices
 
-[user@comet-ln2:~/cuda/simple_hello]
-
+(base) [mthomas@comet-ln3:~/comet101/CUDA/cuda_hello]
 ```
+
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
@@ -862,8 +856,10 @@ To compile: check your environment and use the CUDA <b>`nvcc`</b> command:
 
 #### <a name="enum-gpu-batch-submit"></a>GPU Enumeration: Batch Script Submission
 <b>Contents of the Slurm script </b>
+Script is asking for 1 GPU.
 
-```[comet-ln2: ~/cuda/gpu_enum] cat gpu_enum.sb
+```
+[comet-ln2: ~/cuda/gpu_enum] cat gpu_enum.sb
 #!/bin/bash
 #SBATCH --job-name="gpu_enum"
 #SBATCH --output="gpu_enum.%j.%N.out"
@@ -871,7 +867,7 @@ To compile: check your environment and use the CUDA <b>`nvcc`</b> command:
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=6
 #SBATCH --gres=gpu:1         # define type of GPU
-#SBATCH -t 00:10:00
+#SBATCH -t 00:05:00
 
 #Load the cuda module
 module load cuda
@@ -882,20 +878,18 @@ module load cuda
 ```
 
 <b>Submit the job </b>
-To run the job, type the batch script submission command:
+* To run the job, type the batch script submission command:
 ```
-[comet-ln2:~/cuda/gpu_enum] sbatch gpu_enum.sb
-Submitted batch job 22527745
-[comet-ln2:~/cuda/gpu_enum]
+(base) [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] sbatch hello_cuda.sb
+Submitted batch job 32663364
+
 ```
 <b>Monitor the job </b>
-Monitor the job until it is finished
+* You can monitor the job until it is finished using the `sqeue` command:
 ```
-[user@comet-ln2:~/cuda/gpu_enum] sbatch gpu_enum.sb
-Submitted batch job 22527745
-[user@comet-ln2:~/cuda/gpu_enum] squeue -u user
+(base) [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] squeue -u mthomas
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-          22527745 gpu-share gpu_enum  user PD       0:00      1 (None)
+          32663364 gpu-share gpu_enum  mthomas PD       0:00      1 (Resources)
 
 ```
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
@@ -903,24 +897,27 @@ Submitted batch job 22527745
 <hr>
 
 #### <a name="enum-gpu-batch-output"></a>GPU Enumeration: Batch Job Output
-Output from script is for one device, which is what was specified in script.
+
+* Output from script is for multiple devices, which is what was specified in script.
 
 ```
 [user@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.22527745.comet-31-10.out
  --- Obtaining General Information for CUDA devices  ---
  --- General Information for device 0 ---
-Name: Tesla K80
-Compute capability: 3.7
-Clock rate: 823500
+ --- Obtaining General Information for CUDA devices  ---
+ --- General Information for device 0 ---
+Name: Tesla P100-PCIE-16GB
+Compute capability: 6.0
+Clock rate: 1328500
 Device copy overlap: Enabled
 Kernel execution timeout : Disabled
  --- Memory Information for device 0 ---
-Total global mem: 11996954624
+Total global mem: 17071734784
 Total constant Mem: 65536
 Max mem pitch: 2147483647
 Texture Alignment: 512
  --- MP Information for device 0 ---
-Multiprocessor count: 13
+Multiprocessor count: 56
 Shared mem per mp: 49152
 Registers per mp: 65536
 Threads in warp: 32
@@ -928,7 +925,7 @@ Max threads per block: 1024
 Max thread dimensions: (1024, 1024, 64)
 Max grid dimensions: (2147483647, 65535, 65535)
 ```
-If we change the batch script to ask for 2 devices (see line 8):
+* If we change the batch script to ask for 2 devices (see line 8):
 ```
  1 #!/bin/bash
   2 #SBATCH --job-name="gpu_enum"
@@ -947,49 +944,54 @@ If we change the batch script to ask for 2 devices (see line 8):
  15 ./gpu_enum
 ```
 
-The output looks like this:
+The output will show information for two devices:
 ```
-[user@comet-ln2:~/cuda/gpu_enum] cat gpu_enum.22528598.comet-33-09.out
- --- Obtaining General Information for CUDA devices  ---
- --- General Information for device 0 ---
-Name: Tesla P100-PCIE-16GB
-Compute capability: 6.0
-Clock rate: 1328500
-Device copy overlap: Enabled
-Kernel execution timeout : Disabled
- --- Memory Information for device 0 ---
-Total global mem: 17071734784
-Total constant Mem: 65536
-Max mem pitch: 2147483647
-Texture Alignment: 512
- --- MP Information for device 0 ---
-Multiprocessor count: 56
-Shared mem per mp: 49152
-Registers per mp: 65536
-Threads in warp: 32
-Max threads per block: 1024
-Max thread dimensions: (1024, 1024, 64)
-Max grid dimensions: (2147483647, 65535, 65535)
+base) [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] sbatch gpu_enum.sb
+!Submitted batch job 32663404
+(base) [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] squeue -u mthomas
+             JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
+          32663404 gpu-share gpu_enum  mthomas CG       0:02      1 comet-33-03
+          (base) [mthomas@comet-ln3:~/comet101/CUDA/gpu_enum] cat gpu_enumX.32663404.comet-33-03.out
+           --- Obtaining General Information for CUDA devices  ---
+           --- General Information for device 0 ---
+          Name: Tesla P100-PCIE-16GB
+          Compute capability: 6.0
+          Clock rate: 1328500
+          Device copy overlap: Enabled
+          Kernel execution timeout : Disabled
+           --- Memory Information for device 0 ---
+          Total global mem: 17071734784
+          Total constant Mem: 65536
+          Max mem pitch: 2147483647
+          Texture Alignment: 512
+           --- MP Information for device 0 ---
+          Multiprocessor count: 56
+          Shared mem per mp: 49152
+          Registers per mp: 65536
+          Threads in warp: 32
+          Max threads per block: 1024
+          Max thread dimensions: (1024, 1024, 64)
+          Max grid dimensions: (2147483647, 65535, 65535)
 
- --- General Information for device 1 ---
-Name: Tesla P100-PCIE-16GB
-Compute capability: 6.0
-Clock rate: 1328500
-Device copy overlap: Enabled
-Kernel execution timeout : Disabled
- --- Memory Information for device 1 ---
-Total global mem: 17071734784
-Total constant Mem: 65536
-Max mem pitch: 2147483647
-Texture Alignment: 512
- --- MP Information for device 1 ---
-Multiprocessor count: 56
-Shared mem per mp: 49152
-Registers per mp: 65536
-Threads in warp: 32
-Max threads per block: 1024
-Max thread dimensions: (1024, 1024, 64)
-Max grid dimensions: (2147483647, 65535, 65535)
+           --- General Information for device 1 ---
+          Name: Tesla P100-PCIE-16GB
+          Compute capability: 6.0
+          Clock rate: 1328500
+          Device copy overlap: Enabled
+          Kernel execution timeout : Disabled
+           --- Memory Information for device 1 ---
+          Total global mem: 17071734784
+          Total constant Mem: 65536
+          Max mem pitch: 2147483647
+          Texture Alignment: 512
+           --- MP Information for device 1 ---
+          Multiprocessor count: 56
+          Shared mem per mp: 49152
+          Registers per mp: 65536
+          Threads in warp: 32
+          Max threads per block: 1024
+          Max thread dimensions: (1024, 1024, 64)
+          Max grid dimensions: (2147483647, 65535, 65535)
 ```
 
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
@@ -1005,20 +1007,19 @@ Max grid dimensions: (2147483647, 65535, 65535)
 #### <a name="mat-mul-gpu"></a>CUDA Example: Matrix-Multiplication
 <b>Change to the CUDA Matrix-Multiplication example directory:</b>
 ```
-[user@comet-ln2/comet-examples/comet101]$ cd /home/user/comet-examples/comet101/CUDA
-[user@comet-ln2 CUDA]$ ls -al
-total 427
-drwxr-xr-x  2 user user300     11 Aug  5 19:02 .
-drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
--rw-r--r--  1 user user300    446 Aug  5 19:02 CUDA.8718375.comet-30-08.out
--rw-r--r--  1 user user300    253 Aug  5 19:02 cuda.sb
--rw-r--r--  1 user user300   5106 Aug  5 19:02 exception.h
--rw-r--r--  1 user user300   1168 Aug  5 19:02 helper_functions.h
--rw-r--r--  1 user user300  29011 Aug  5 19:02 helper_image.h
--rw-r--r--  1 user user300  23960 Aug  5 19:02 helper_string.h
--rw-r--r--  1 user user300  15414 Aug  5 19:02 helper_timer.h
--rwxr-xr-x  1 user user300 533168 Aug  5 19:02 matmul
--rw-r--r--  1 user user300  13482 Aug  5 19:02 matrixMul.cu
+(base) [mthomas@comet-ln3:~/comet101/CUDA/matmul] ll
+total 454
+drwxr-xr-x 2 mthomas use300     11 Apr 16 02:59 .
+drwxr-xr-x 5 mthomas use300      5 Apr 16 02:37 ..
+-rw-r--r-- 1 mthomas use300    253 Apr 16 01:56 cuda_matmul.sb
+-rw-r--r-- 1 mthomas use300   5106 Apr 16 01:46 exception.h
+-rw-r--r-- 1 mthomas use300   1168 Apr 16 01:46 helper_functions.h
+-rw-r--r-- 1 mthomas use300  29011 Apr 16 01:46 helper_image.h
+-rw-r--r-- 1 mthomas use300  23960 Apr 16 01:46 helper_string.h
+-rw-r--r-- 1 mthomas use300  15414 Apr 16 01:46 helper_timer.h
+-rwxr-xr-x 1 mthomas use300 652768 Apr 16 01:46 matmul
+-rw-r--r-- 1 mthomas use300  13482 Apr 16 02:36 matmul.cu
+-rw-r--r-- 1 mthomas use300    370 Apr 16 02:59 matmul.sb
 ```
 
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
@@ -1063,7 +1064,7 @@ drwxr-xr-x 16 user user300     16 Aug  5 19:02 ..
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=6
 #SBATCH --gres=gpu:1
-#SBATCH -t 01:00:00
+#SBATCH -t 00:10:00
 
 #Load the cuda module
 module load cuda
@@ -1073,20 +1074,17 @@ module load cuda
 ```
 <b> Submit the job:</b>
 ```
-[user@comet-ln2 CUDA]$ sbatch cuda.sb
-Submitted batch job 18347288
-[user@comet-ln2 CUDA]$
-
+(base) [mthomas@comet-ln3:~/comet101/CUDA/matmul] sbatch matmul.sb
+Submitted batch job 32663647
 ```
 <b>Monitor the job:</b>
 ```
-[user@comet-ln2 CUDA]$squeue -u user
+(base) [mthomas@comet-ln3:~/comet101/CUDA/matmul] squeue -u mthomas
              JOBID PARTITION     NAME     USER ST       TIME  NODES NODELIST(REASON)
-          18347288 gpu-share     matmul  user PD       0:00      1 (None)
-[user@comet-ln2 CUDA]$
+          32663647 gpu-share   matmul  mthomas PD       0:00      1 (Resources)
+(base) [mthomas@comet-ln3:~/comet101/CUDA/matmul]
+
 ```
-
-
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
 [Back to Top](#top)
 <hr>
@@ -1094,20 +1092,18 @@ Submitted batch job 18347288
 #### <a name="mat-mul-gpu-batch-output"></a>Matrix Mult. (GPU): Batch Job Output
 
 ```
-[user@comet-ln2 CUDA]$ cat matmul.18347288.comet-33-01.out
+(base) [mthomas@comet-ln3:~/comet101/CUDA/matmul] cat matmul.32663647.comet-33-03.out
 [Matrix Multiply Using CUDA] - Starting...
-[Matrix Multiply Using CUDA] - Welcome SI18 Attendees...
-
 GPU Device 0: "Tesla P100-PCIE-16GB" with compute capability 6.0
 
 MatrixA(320,320), MatrixB(640,320)
 Computing result using CUDA Kernel...
 done
-Performance= 1703.30 GFlop/s, Time= 0.077 msec, Size= 131072000 Ops, WorkgroupSize= 1024 threads/block
+Performance= 1676.99 GFlop/s, Time= 0.078 msec, Size= 131072000 Ops, WorkgroupSize= 1024 threads/block
 Checking computed result for correctness: Result = PASS
 
-NOTE: The CUDA Samples are not meant for performance measurements. Results may vary when GPU Boost is enabled.
-
+NOTE: The CUDA Samples are not meant for performance measurements. Results may
+vary when GPU Boost is enabled.
 ```
 
 [Back to GPU/CUDA Jobs](#comp-and-run-cuda-jobs) <br>
